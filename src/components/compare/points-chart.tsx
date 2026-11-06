@@ -100,7 +100,7 @@ export function PointsChart({ a, b }: { a: PointsSeries; b: PointsSeries }) {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={rows}
-            margin={{ top: 12, right: 88, bottom: 8, left: 0 }}
+            margin={{ top: 28, right: 88, bottom: 8, left: 0 }}
             accessibilityLayer={false}
           >
             <CartesianGrid

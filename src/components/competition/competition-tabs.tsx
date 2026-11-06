@@ -6,12 +6,28 @@ import {
   type CompetitionCode,
 } from "@/lib/competitions";
 
-export type CompetitionTab = "standings" | "matches" | "scorers";
+export type CompetitionTab = "standings" | "matches" | "scorers" | "compare";
 
-const TABS: { id: CompetitionTab; label: string; path: string }[] = [
-  { id: "standings", label: "Classificação", path: "" },
-  { id: "matches", label: "Jogos", path: "/jogos" },
-  { id: "scorers", label: "Artilharia", path: "/artilharia" },
+const TABS: {
+  id: CompetitionTab;
+  label: string;
+  title: string;
+  path: string;
+}[] = [
+  { id: "standings", label: "Classificação", title: "Classificação", path: "" },
+  { id: "matches", label: "Jogos", title: "Jogos", path: "/jogos" },
+  {
+    id: "scorers",
+    label: "Artilharia",
+    title: "Artilharia",
+    path: "/artilharia",
+  },
+  {
+    id: "compare",
+    label: "Comparar",
+    title: "Comparar times",
+    path: "/comparar",
+  },
 ];
 
 const TITLE_SUFFIX = "Futebol Dashboard";
@@ -24,7 +40,7 @@ export function competitionMetadata(
     return { title: `Competição não encontrada | ${TITLE_SUFFIX}` };
   }
   const { name, preposition } = COMPETITIONS[code];
-  const label = TABS.find((item) => item.id === tab)?.label ?? "";
+  const label = TABS.find((item) => item.id === tab)?.title ?? "";
   return {
     title: `${label} ${preposition} ${name} | ${TITLE_SUFFIX}`,
     description: `${label} ${preposition} ${name} na temporada atual, com dados da football-data.org.`,

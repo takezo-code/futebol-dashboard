@@ -14,6 +14,10 @@ describe("CompetitionTabs", () => {
     expect(matches).toHaveAttribute("aria-current", "page");
     expect(standings).not.toHaveAttribute("aria-current");
     expect(scorers).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("link", { name: "Comparar" })).toHaveAttribute(
+      "href",
+      "/competicoes/BSA/comparar",
+    );
   });
 });
 
@@ -24,6 +28,12 @@ describe("competitionMetadata", () => {
     );
     expect(competitionMetadata("CLI", "scorers").title).toBe(
       "Artilharia da Copa Libertadores | Futebol Dashboard",
+    );
+  });
+
+  it("titles the comparison page", () => {
+    expect(competitionMetadata("BSA", "compare").title).toBe(
+      "Comparar times do Brasileirão Série A | Futebol Dashboard",
     );
   });
 
