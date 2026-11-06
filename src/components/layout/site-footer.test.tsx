@@ -11,4 +11,18 @@ describe("SiteFooter", () => {
       ),
     ).toBeInTheDocument();
   });
+
+  it("links to the author profiles", () => {
+    render(<SiteFooter />);
+    expect(
+      screen.getByRole("link", { name: "Código no GitHub" }),
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/takezo-code/futebol-dashboard",
+    );
+    expect(screen.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
+      "href",
+      "https://www.linkedin.com/in/thales-ribeiro-27149a34b/",
+    );
+  });
 });
