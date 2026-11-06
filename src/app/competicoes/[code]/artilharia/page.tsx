@@ -4,7 +4,7 @@ import {
   CompetitionTabs,
   competitionMetadata,
 } from "@/components/competition/competition-tabs";
-import { ScorersChart } from "@/components/scorers/scorers-chart";
+import { LazyScorersChart } from "@/components/charts/lazy-charts";
 import { ScorersTable } from "@/components/scorers/scorers-table";
 import { isCompetitionCode } from "@/lib/competitions";
 import { getScorers } from "@/lib/football-api/competitions";
@@ -40,7 +40,7 @@ export default async function ScorersPage({ params }: PageProps) {
   return (
     <div className="flex flex-col gap-6">
       <CompetitionTabs code={code} active="scorers" />
-      <ScorersChart scorers={scorers} />
+      <LazyScorersChart scorers={scorers} />
       <ScorersTable scorers={scorers} />
     </div>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CompareTable } from "@/components/compare/compare-table";
 import { HeadToHeadList } from "@/components/compare/head-to-head-list";
-import { PointsChart } from "@/components/compare/points-chart";
+import { LazyPointsChart } from "@/components/charts/lazy-charts";
 import { TeamPicker } from "@/components/compare/team-picker";
 import {
   CompetitionTabs,
@@ -83,7 +83,7 @@ export default async function ComparePage({ params, searchParams }: PageProps) {
             <h2 id="evolucao" className="font-display text-2xl font-semibold">
               Evolução de pontos por rodada
             </h2>
-            <PointsChart
+            <LazyPointsChart
               a={{
                 name: picked.a.team.shortName ?? picked.a.team.name,
                 points: pointsProgression(matches, picked.a.team.id),
