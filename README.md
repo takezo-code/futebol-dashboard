@@ -2,7 +2,9 @@
 
 [![CI](https://github.com/takezo-code/futebol-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/takezo-code/futebol-dashboard/actions/workflows/ci.yml)
 
-Painel em Next.js com classificação, jogos e artilharia das principais ligas de futebol, usando dados da football-data.org.
+Painel em Next.js com classificação, jogos e artilharia das principais ligas e copas de clubes, usando dados da football-data.org.
+
+**Acesse:** [futebol-dashboard-mauve.vercel.app](https://futebol-dashboard-mauve.vercel.app/)
 
 ## Como rodar localmente
 
