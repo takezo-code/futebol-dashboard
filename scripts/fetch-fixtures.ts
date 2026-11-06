@@ -15,6 +15,7 @@ const DELAY_MS = 7000;
 const MISSING_TEAM_ID = 99999;
 const OUT_OF_RANGE_TEAM_ID = 999999999;
 const WORLD_CUP_SEASON = 2026;
+const LIBERTADORES_SEASON = 2026;
 
 function readToken(): string {
   const value = process.env.FOOTBALL_DATA_TOKEN?.trim();
@@ -114,6 +115,20 @@ await save("team-matches.json", teamMatches.body);
 
 const standingsCl = await call("/competitions/CL/standings");
 await save("standings-cl.json", standingsCl.body);
+
+const matchesCl = await call("/competitions/CL/matches");
+await save("matches-cl.json", matchesCl.body);
+
+const standingsCli = await call(
+  `/competitions/CLI/standings?season=${LIBERTADORES_SEASON}`,
+);
+await save("standings-cli.json", standingsCli.body);
+
+const matchesCli = await call("/competitions/CLI/matches");
+await save("matches-cli.json", matchesCli.body);
+
+const matchesBsaSeason = await call("/competitions/BSA/matches");
+await save("matches-bsa-season.json", matchesBsaSeason.body);
 
 const standingsWc = await call(
   `/competitions/WC/standings?season=${WORLD_CUP_SEASON}`,
