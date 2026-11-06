@@ -4,7 +4,7 @@
 
 Painel de futebol em Next.js com classificação, jogos, artilharia, comparador de times e times favoritos das principais ligas e copas de clubes, usando dados da football-data.org.
 
-**Acesse:** [futebol-dashboard-mauve.vercel.app](https://futebol-dashboard-mauve.vercel.app/)
+**Acesse:** [painel-da-bola.vercel.app](https://painel-da-bola.vercel.app/)
 
 | Desktop                                                                               | Celular                                                                              |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
