@@ -32,6 +32,9 @@ describe("MatchCard", () => {
   it("shows the kickoff time when there is no score", () => {
     const match = findMatch((m) => m.utcDate === "2026-11-06T23:00:00Z");
     render(<MatchCard match={match} />);
+    expect(
+      screen.getAllByRole("link").map((link) => link.getAttribute("href")),
+    ).toEqual([`/times/${match.homeTeam.id}`, `/times/${match.awayTeam.id}`]);
     expect(screen.getByText("20:00")).toBeInTheDocument();
     expect(screen.getByText("Agendado")).toBeInTheDocument();
   });
@@ -65,6 +68,7 @@ describe("MatchCard", () => {
     };
     render(<MatchCard match={match} />);
     expect(screen.getByText("A definir")).toBeInTheDocument();
+    expect(screen.getAllByRole("link")).toHaveLength(1);
   });
 });
 

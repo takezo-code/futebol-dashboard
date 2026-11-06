@@ -1,3 +1,4 @@
+import { TeamLink } from "@/components/team/team-link";
 import { Crest } from "@/components/ui/crest";
 import type { Match, MatchTeam } from "@/lib/football-api/types";
 import {
@@ -31,9 +32,12 @@ function TeamSide({
       }`}
     >
       <Crest src={team.crest} name={name} size={28} />
-      <span className="line-clamp-2 text-sm leading-tight font-medium break-words sm:text-base">
+      <TeamLink
+        id={team.id}
+        className="line-clamp-2 text-sm leading-tight font-medium break-words sm:text-base"
+      >
         {name}
-      </span>
+      </TeamLink>
     </span>
   );
 }

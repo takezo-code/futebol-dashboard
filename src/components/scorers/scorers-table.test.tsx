@@ -16,6 +16,10 @@ describe("ScorersTable", () => {
       throw new Error("no rows");
     }
     expect(within(first).getByText("Kevin Viveros")).toBeInTheDocument();
+    expect(within(first).getByRole("link")).toHaveAttribute(
+      "href",
+      "/times/1768",
+    );
     expect(within(first).getByText("21")).toBeInTheDocument();
   });
 

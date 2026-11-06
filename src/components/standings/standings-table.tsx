@@ -1,3 +1,4 @@
+import { TeamLink } from "@/components/team/team-link";
 import { Crest } from "@/components/ui/crest";
 import { getZone, type CompetitionConfig } from "@/lib/competitions";
 import type { StandingRow } from "@/lib/football-api/types";
@@ -96,7 +97,9 @@ export function StandingsTable({
                 >
                   <span className="flex items-center gap-2">
                     <Crest src={row.team.crest} name={teamName} size={20} />
-                    <span className="whitespace-nowrap">{teamName}</span>
+                    <TeamLink id={row.team.id} className="whitespace-nowrap">
+                      {teamName}
+                    </TeamLink>
                   </span>
                 </th>
                 {[

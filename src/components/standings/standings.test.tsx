@@ -33,6 +33,9 @@ describe("StandingsTable", () => {
       throw new Error("no rows");
     }
     expect(within(first).getByText("Flamengo")).toBeInTheDocument();
+    expect(
+      within(first).getByRole("link", { name: /Flamengo/ }),
+    ).toHaveAttribute("href", "/times/1783");
     expect(within(first).getByText("76")).toBeInTheDocument();
     expect(within(first).getByText("+42")).toBeInTheDocument();
     expect(bodyRows[17]).toHaveAttribute("data-zone", "relegation");

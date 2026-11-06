@@ -1,3 +1,4 @@
+import { TeamLink } from "@/components/team/team-link";
 import { Crest } from "@/components/ui/crest";
 import type { Scorer } from "@/lib/football-api/types";
 
@@ -76,7 +77,7 @@ export function ScorersTable({ scorers }: { scorers: Scorer[] }) {
                 <td className="px-3">
                   <span className="flex items-center gap-2 whitespace-nowrap">
                     <Crest src={scorer.team.crest} name={teamName} size={20} />
-                    {teamName}
+                    <TeamLink id={scorer.team.id}>{teamName}</TeamLink>
                   </span>
                 </td>
                 <td className="font-display px-2 text-right text-base tabular-nums">
