@@ -5,6 +5,7 @@ import { SquadList } from "@/components/team/squad-list";
 import { TeamHeader } from "@/components/team/team-header";
 import { TeamMatches } from "@/components/team/team-matches";
 import { TeamStatsCards } from "@/components/team/team-stats";
+import { NotFoundError } from "@/lib/football-api/errors";
 import { handleApiError } from "@/lib/football-api/handle-api-error";
 import { getTeam, getTeamMatches } from "@/lib/football-api/teams";
 import type { Match, Team } from "@/lib/football-api/types";
@@ -37,8 +38,13 @@ export async function generateMetadata({
       title: `${team.name} | Futebol Dashboard`,
       description: `Elenco, jogos e estatísticas do ${team.name} na temporada atual.`,
     };
-  } catch {
-    return { title: "Time | Futebol Dashboard" };
+  } catch (error) {
+    return {
+      title:
+        error instanceof NotFoundError
+          ? "Time não encontrado | Futebol Dashboard"
+          : "Time | Futebol Dashboard",
+    };
   }
 }
 
