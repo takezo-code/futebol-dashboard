@@ -2,9 +2,12 @@ import { describe, expect, it } from "vitest";
 import competitionBsa from "./__fixtures__/competition-bsa.json";
 import competitions from "./__fixtures__/competitions.json";
 import matchesBsa from "./__fixtures__/matches-bsa-matchday.json";
+import matchesBsaSeason from "./__fixtures__/matches-bsa-season.json";
+import matchesCli from "./__fixtures__/matches-cli.json";
 import scorersBsa from "./__fixtures__/scorers-bsa.json";
 import standingsBsa from "./__fixtures__/standings-bsa.json";
 import standingsCl from "./__fixtures__/standings-cl.json";
+import standingsCli from "./__fixtures__/standings-cli.json";
 import standingsWc from "./__fixtures__/standings-wc.json";
 import teamDetail from "./__fixtures__/team-detail.json";
 import teamMatches from "./__fixtures__/team-matches.json";
@@ -125,5 +128,28 @@ describe("football api schemas", () => {
 
   it("strips fields the project does not use", () => {
     expect(matchSchema.parse(firstMatch)).not.toHaveProperty("odds");
+  });
+
+  it("parses cup matches with cancelled and penalty games", () => {
+    const { matches } = matchesResponseSchema.parse(matchesCli);
+    expect(matches).toHaveLength(156);
+    const shootout = matches.find(
+      (m) => m.score.duration === "PENALTY_SHOOTOUT",
+    );
+    expect(shootout?.score.penalties).toEqual({ home: 5, away: 3 });
+    expect(shootout?.score.regularTime).toEqual({ home: 1, away: 0 });
+  });
+
+  it("parses libertadores standings without groups", () => {
+    const { standings } = standingsResponseSchema.parse(standingsCli);
+    expect(standings).toHaveLength(3);
+    expect(standings[0]?.table).toHaveLength(32);
+    expect(standings[0]?.group).toBeNull();
+  });
+
+  it("parses a full league season", () => {
+    expect(matchesResponseSchema.parse(matchesBsaSeason).matches).toHaveLength(
+      380,
+    );
   });
 });

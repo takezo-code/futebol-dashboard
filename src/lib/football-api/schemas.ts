@@ -85,6 +85,8 @@ export const scoreSchema = z.object({
   duration: z.string(),
   fullTime: scoreLineSchema,
   halfTime: scoreLineSchema,
+  regularTime: scoreLineSchema.nullish(),
+  penalties: scoreLineSchema.nullish(),
 });
 
 export const matchSchema = z.object({
