@@ -16,6 +16,7 @@ import {
   matchesResponseSchema,
   matchSchema,
   scorersResponseSchema,
+  standingRowSchema,
   standingsResponseSchema,
   teamSchema,
 } from "./schemas";
@@ -83,6 +84,23 @@ describe("football api schemas", () => {
       homeTeam: undefinedTeam,
     });
     expect(result.homeTeam.name).toBeNull();
+  });
+
+  it("accepts matches from competitions without emblem", () => {
+    const result = matchSchema.parse({
+      ...firstMatch,
+      competition: { ...firstMatch?.competition, emblem: null },
+    });
+    expect(result.competition.emblem).toBeNull();
+  });
+
+  it("accepts teams without short name, tla or crest", () => {
+    const row = standingsBsa.standings[0]?.table[0];
+    const result = standingRowSchema.parse({
+      ...row,
+      team: { ...row?.team, shortName: null, tla: null, crest: null },
+    });
+    expect(result.team.crest).toBeNull();
   });
 
   it("parses scorers with nullable assists and penalties", () => {

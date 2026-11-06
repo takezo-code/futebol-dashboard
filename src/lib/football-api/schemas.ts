@@ -10,9 +10,9 @@ export const areaSchema = z.object({
 export const teamRefSchema = z.object({
   id: z.number(),
   name: z.string(),
-  shortName: z.string(),
-  tla: z.string(),
-  crest: z.string(),
+  shortName: z.string().nullable(),
+  tla: z.string().nullable(),
+  crest: z.string().nullable(),
 });
 
 export const matchTeamSchema = z.object({
@@ -36,7 +36,7 @@ export const competitionSummarySchema = z.object({
   name: z.string(),
   code: z.string(),
   type: z.string(),
-  emblem: z.string(),
+  emblem: z.string().nullable(),
 });
 
 export const competitionSchema = competitionSummarySchema.extend({
