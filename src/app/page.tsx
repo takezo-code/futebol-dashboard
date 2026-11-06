@@ -20,7 +20,7 @@ export default async function Home() {
   try {
     [competitions, today] = await Promise.all([
       getCompetitions(),
-      loadTodayMatches(),
+      loadTodayMatches(new Date()),
     ]);
   } catch (error) {
     return handleApiError(error);

@@ -7,7 +7,7 @@ import type { SeasonProgress } from "@/lib/stats/season-progress";
 type CompetitionHeaderProps = {
   competition: Competition;
   config: CompetitionConfig;
-  progress: SeasonProgress;
+  progress: SeasonProgress | null;
 };
 
 const STRIPES = Array.from({ length: 12 }, (_, index) => index);
@@ -38,35 +38,40 @@ export function CompetitionHeader({
             <h1 className="font-display text-3xl leading-tight font-bold sm:text-4xl">
               {config.name}
             </h1>
-            <p className="flex gap-3 text-sm text-white/85">
+            <p className="flex gap-3 text-sm text-white">
               <span>{config.country}</span>
               <span>Temporada {seasonLabel(startDate, endDate)}</span>
             </p>
           </div>
         </div>
-        <div className="flex flex-col gap-2 sm:w-52 sm:items-end">
-          <p className="flex items-baseline gap-1.5">
-            <span className="font-display text-2xl font-bold tabular-nums">
-              {progress.label}
-            </span>
-            {progress.detail ? (
-              <span className="text-sm text-white/85">{progress.detail}</span>
-            ) : null}
-          </p>
-          <div
-            role="progressbar"
-            aria-label="Progresso da temporada"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={progress.percent}
-            className="h-1.5 w-full overflow-hidden rounded-full bg-white/25"
-          >
+        {progress ? (
+          <div className="flex flex-col gap-2 sm:w-52 sm:items-end">
+            <p className="flex items-baseline gap-1.5">
+              <span className="font-display text-2xl font-bold tabular-nums">
+                {progress.label}
+              </span>
+              {progress.detail ? (
+                <span className="text-sm text-white">{progress.detail}</span>
+              ) : null}
+            </p>
             <div
-              className="bg-accent h-full rounded-full"
-              style={{ width: `${progress.percent}%` }}
-            />
+              role="progressbar"
+              aria-label="Progresso da temporada"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={progress.percent}
+              aria-valuetext={[progress.label, progress.detail]
+                .filter(Boolean)
+                .join(" ")}
+              className="h-1.5 w-full overflow-hidden rounded-full bg-white/25"
+            >
+              <div
+                className="bg-accent h-full rounded-full"
+                style={{ width: `${progress.percent}%` }}
+              />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </header>
   );

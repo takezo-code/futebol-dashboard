@@ -4,7 +4,6 @@ import {
   CompetitionTabs,
   competitionMetadata,
 } from "@/components/competition/competition-tabs";
-
 import { MatchdayNav } from "@/components/matches/matchday-nav";
 import { MatchesByDay } from "@/components/overview/matches-by-day";
 import { isCompetitionCode } from "@/lib/competitions";

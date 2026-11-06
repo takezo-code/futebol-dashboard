@@ -43,7 +43,7 @@ export function seasonProgress(
     const current = pickRound(buildRounds(league), undefined, now);
     return {
       label: current?.label ?? `Rodada ${season.currentMatchday ?? 1}`,
-      detail: `de ${total}`,
+      detail: total > 0 ? `de ${total}` : null,
       percent: clampPercent((finished / league.length) * 100),
     };
   }

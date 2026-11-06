@@ -26,5 +26,17 @@ describe("CompetitionHeader", () => {
       name: "Progresso da temporada",
     });
     expect(bar).toHaveAttribute("aria-valuenow", "89");
+    expect(bar).toHaveAttribute("aria-valuetext", "Rodada 34 de 38");
+  });
+
+  it("hides the progress when it is not available", () => {
+    render(
+      <CompetitionHeader
+        competition={competition}
+        config={COMPETITIONS.BSA}
+        progress={null}
+      />,
+    );
+    expect(screen.queryByRole("progressbar")).toBeNull();
   });
 });

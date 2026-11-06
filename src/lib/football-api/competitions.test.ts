@@ -128,15 +128,23 @@ describe("competition services", () => {
       ],
     };
     respondWith(withWorldCup);
-    const result = await getTodayMatches();
-    expect(lastCall()).toEqual({ url: `${BASE_URL}/matches`, revalidate: 600 });
-    expect(result).toHaveLength(10);
+    const result = await getTodayMatches("2026-11-06");
+    expect(lastCall()).toEqual({
+      url: `${BASE_URL}/matches?dateFrom=2026-11-06&dateTo=2026-11-07`,
+      revalidate: 600,
+    });
     expect(result.some((m) => m.competition.code === "WC")).toBe(false);
+    expect(result.some((m) => m.utcDate === "2026-11-06T00:30:00Z")).toBe(
+      false,
+    );
+    expect(result.length).toBeGreaterThan(0);
   });
 
   it("loadTodayMatches returns an empty list when the api fails", async () => {
     fetchMock.mockResolvedValue(new Response("{}", { status: 500 }));
-    await expect(loadTodayMatches()).resolves.toEqual([]);
+    await expect(
+      loadTodayMatches(new Date("2026-11-06T12:00:00Z")),
+    ).resolves.toEqual([]);
   });
 
   it("encodes the competition code", async () => {

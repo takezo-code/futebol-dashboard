@@ -54,6 +54,15 @@ describe("seasonProgress", () => {
     ).toBe(100);
   });
 
+  it("omits the total when rounds have no number", () => {
+    const base = bsaMatches[0];
+    if (!base) {
+      throw new Error("no matches");
+    }
+    const progress = seasonProgress(bsa, [{ ...base, matchday: null }], now);
+    expect(progress.detail).toBeNull();
+  });
+
   it("never returns NaN without matches", () => {
     const progress = seasonProgress(bsa, [], now);
     expect(Number.isNaN(progress.percent)).toBe(false);

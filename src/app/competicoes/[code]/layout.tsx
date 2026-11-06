@@ -25,26 +25,23 @@ export default async function CompetitionLayout({
   const config = COMPETITIONS[code];
 
   let competition: Competition;
-  let matches: Match[];
   try {
-    [competition, matches] = await Promise.all([
-      getCompetition(code),
-      getMatches(code),
-    ]);
+    competition = await getCompetition(code);
   } catch (error) {
     return handleApiError(error);
   }
+  const matches: Match[] | null = await getMatches(code).catch(() => null);
 
   return (
     <div className="flex flex-col gap-6">
       <CompetitionHeader
         competition={competition}
         config={config}
-        progress={seasonProgress(
-          competition.currentSeason,
-          matches,
-          new Date(),
-        )}
+        progress={
+          matches
+            ? seasonProgress(competition.currentSeason, matches, new Date())
+            : null
+        }
       />
       {children}
     </div>

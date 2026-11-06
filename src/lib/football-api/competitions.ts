@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
 import { isCompetitionCode } from "@/lib/competitions";
+import { brasiliaDayKey } from "@/lib/format";
 import { apiFetch, CACHE } from "./client";
 import {
   competitionSchema,
@@ -75,18 +76,28 @@ export const getCompetitionTeams = cache(
   },
 );
 
-export const getTodayMatches = cache(async (): Promise<Match[]> => {
-  const data = await apiFetch("/matches", matchesResponseSchema, {
-    revalidate: CACHE.MATCHES,
-  });
-  return data.matches.filter((match) =>
-    isCompetitionCode(match.competition.code),
+function nextDay(day: string): string {
+  const date = new Date(`${day}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + 1);
+  return date.toISOString().slice(0, 10);
+}
+
+export const getTodayMatches = cache(async (day: string): Promise<Match[]> => {
+  const data = await apiFetch(
+    `/matches?dateFrom=${day}&dateTo=${nextDay(day)}`,
+    matchesResponseSchema,
+    { revalidate: CACHE.MATCHES },
+  );
+  return data.matches.filter(
+    (match) =>
+      isCompetitionCode(match.competition.code) &&
+      brasiliaDayKey(new Date(match.utcDate)) === day,
   );
 });
 
-export async function loadTodayMatches(): Promise<Match[]> {
+export async function loadTodayMatches(now: Date): Promise<Match[]> {
   try {
-    return await getTodayMatches();
+    return await getTodayMatches(brasiliaDayKey(now));
   } catch {
     return [];
   }
