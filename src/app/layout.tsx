@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Futebol Dashboard",
-  description: "Classificação, jogos e artilharia das principais ligas de futebol.",
+  description:
+    "Classificação, jogos e artilharia das principais ligas de futebol.",
 };
 
 export default function RootLayout({
