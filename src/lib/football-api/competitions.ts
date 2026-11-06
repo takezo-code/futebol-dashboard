@@ -29,10 +29,15 @@ export const getCompetition = cache(
     }),
 );
 
-export const getStandings = cache(async (code: string): Promise<Standings> =>
-  apiFetch(competitionPath(code, "/standings"), standingsResponseSchema, {
-    revalidate: CACHE.STANDINGS,
-  }),
+export const getStandings = cache(
+  async (code: string, season?: number): Promise<Standings> => {
+    const query = season === undefined ? "" : `?season=${season}`;
+    return apiFetch(
+      competitionPath(code, `/standings${query}`),
+      standingsResponseSchema,
+      { revalidate: CACHE.STANDINGS },
+    );
+  },
 );
 
 export const getMatches = cache(

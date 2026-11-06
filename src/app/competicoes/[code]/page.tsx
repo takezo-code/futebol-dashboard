@@ -7,7 +7,11 @@ import {
 import { StandingsTable } from "@/components/standings/standings-table";
 import { ZoneLegend } from "@/components/standings/zone-legend";
 import { COMPETITIONS, isCompetitionCode } from "@/lib/competitions";
-import { getMatches, getStandings } from "@/lib/football-api/competitions";
+import {
+  getCompetition,
+  getMatches,
+  getStandings,
+} from "@/lib/football-api/competitions";
 import { handleApiError } from "@/lib/football-api/handle-api-error";
 import type { Match, Standings } from "@/lib/football-api/types";
 import { recentForm, type FormEntry } from "@/lib/stats/form";
@@ -36,8 +40,10 @@ export default async function StandingsPage({ params }: PageProps) {
   let standings: Standings;
   let matches: Match[];
   try {
+    const competition = await getCompetition(code);
+    const season = Number(competition.currentSeason.startDate.slice(0, 4));
     [standings, matches] = await Promise.all([
-      getStandings(code),
+      getStandings(code, season),
       getMatches(code),
     ]);
   } catch (error) {

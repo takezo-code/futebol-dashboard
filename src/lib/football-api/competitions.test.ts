@@ -104,6 +104,14 @@ describe("competition services", () => {
     expect(result).toHaveLength(20);
   });
 
+  it("getStandings asks for a specific season when given", async () => {
+    respondWith(standingsBsa);
+    await getStandings("CLI", 2026);
+    expect(lastCall().url).toBe(
+      `${BASE_URL}/competitions/CLI/standings?season=2026`,
+    );
+  });
+
   it("encodes the competition code", async () => {
     respondWith(standingsBsa);
     await getStandings("A/B?c");
