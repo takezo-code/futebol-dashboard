@@ -5,6 +5,7 @@ import {
   formatMatchTime,
   matchStatusLabel,
   seasonLabel,
+  translateClubColors,
 } from "./format";
 
 describe("format", () => {
@@ -31,6 +32,16 @@ describe("format", () => {
     expect(formatGoalDifference(42)).toBe("+42");
     expect(formatGoalDifference(-21)).toBe("−21");
     expect(formatGoalDifference(0)).toBe("0");
+  });
+
+  it("translates club colors", () => {
+    expect(translateClubColors("Maroon / Green / White")).toBe(
+      "Grená, Verde e Branco",
+    );
+    expect(translateClubColors("Red / Black")).toBe("Vermelho e Preto");
+    expect(translateClubColors("Teal / White")).toBe("Teal e Branco");
+    expect(translateClubColors("Navy Blue")).toBe("Azul-marinho");
+    expect(translateClubColors(null)).toBeNull();
   });
 
   it("labels single-year and split seasons", () => {

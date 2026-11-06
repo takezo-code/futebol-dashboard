@@ -58,3 +58,41 @@ export function seasonLabel(startDate: string, endDate: string): string {
   const endYear = endDate.slice(0, 4);
   return startYear === endYear ? startYear : `${startYear}/${endYear.slice(2)}`;
 }
+
+const COLOR_NAMES: Record<string, string> = {
+  red: "Vermelho",
+  white: "Branco",
+  black: "Preto",
+  green: "Verde",
+  blue: "Azul",
+  "navy blue": "Azul-marinho",
+  navy: "Azul-marinho",
+  "sky blue": "Azul-celeste",
+  "royal blue": "Azul-royal",
+  yellow: "Amarelo",
+  gold: "Dourado",
+  orange: "Laranja",
+  maroon: "Grená",
+  claret: "Grená",
+  purple: "Roxo",
+  grey: "Cinza",
+  gray: "Cinza",
+  silver: "Prata",
+  brown: "Marrom",
+  pink: "Rosa",
+};
+
+export function translateClubColors(value: string | null): string | null {
+  if (value === null) {
+    return null;
+  }
+  const colors = value
+    .split("/")
+    .map((color) => color.trim())
+    .filter((color) => color.length > 0)
+    .map((color) => COLOR_NAMES[color.toLowerCase()] ?? color);
+  if (colors.length <= 1) {
+    return colors[0] ?? null;
+  }
+  return `${colors.slice(0, -1).join(", ")} e ${colors.at(-1)}`;
+}
