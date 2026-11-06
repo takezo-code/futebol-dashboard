@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { isCompetitionCode } from "@/lib/competitions";
 import { apiFetch, CACHE } from "./client";
 import {
   competitionSchema,
@@ -73,3 +74,20 @@ export const getCompetitionTeams = cache(
     return data.teams;
   },
 );
+
+export const getTodayMatches = cache(async (): Promise<Match[]> => {
+  const data = await apiFetch("/matches", matchesResponseSchema, {
+    revalidate: CACHE.MATCHES,
+  });
+  return data.matches.filter((match) =>
+    isCompetitionCode(match.competition.code),
+  );
+});
+
+export async function loadTodayMatches(): Promise<Match[]> {
+  try {
+    return await getTodayMatches();
+  } catch {
+    return [];
+  }
+}

@@ -4,16 +4,24 @@ import {
   COMPETITIONS,
   isCompetitionCode,
 } from "@/lib/competitions";
-import { getCompetitions } from "@/lib/football-api/competitions";
+import { TodayMatches } from "@/components/home/today-matches";
+import {
+  getCompetitions,
+  loadTodayMatches,
+} from "@/lib/football-api/competitions";
 import { handleApiError } from "@/lib/football-api/handle-api-error";
-import type { Competition } from "@/lib/football-api/types";
+import type { Competition, Match } from "@/lib/football-api/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
   let competitions: Competition[];
+  let today: Match[];
   try {
-    competitions = await getCompetitions();
+    [competitions, today] = await Promise.all([
+      getCompetitions(),
+      loadTodayMatches(),
+    ]);
   } catch (error) {
     return handleApiError(error);
   }
@@ -36,6 +44,7 @@ export default async function Home() {
           Escolha uma competição para ver classificação, jogos e artilharia.
         </p>
       </div>
+      <TodayMatches matches={today} />
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {COMPETITION_CODES.map((code) => {
           const competition = byCode.get(code);

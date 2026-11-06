@@ -25,8 +25,12 @@ export function CompetitionCard({ competition, config }: CompetitionCardProps) {
           {config.name}
         </span>
         <span className="text-muted text-sm">{config.country}</span>
-        <span className="text-muted text-sm">
-          Temporada {seasonLabel(startDate, endDate)}
+        <span className="text-muted flex gap-3 text-sm">
+          <span>Temporada {seasonLabel(startDate, endDate)}</span>
+          {config.format === "league" &&
+          competition.currentSeason.currentMatchday !== null ? (
+            <span>Rodada {competition.currentSeason.currentMatchday}</span>
+          ) : null}
         </span>
       </span>
     </Link>

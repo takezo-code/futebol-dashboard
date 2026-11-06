@@ -5,6 +5,7 @@ import matchesBsa from "./__fixtures__/matches-bsa-matchday.json";
 import scorersBsa from "./__fixtures__/scorers-bsa.json";
 import standingsBsa from "./__fixtures__/standings-bsa.json";
 import teamsBsa from "./__fixtures__/teams-bsa.json";
+import todayMatches from "./__fixtures__/matches-today.json";
 import {
   getCompetition,
   getCompetitions,
@@ -12,6 +13,8 @@ import {
   getMatches,
   getScorers,
   getStandings,
+  getTodayMatches,
+  loadTodayMatches,
 } from "./competitions";
 
 const BASE_URL = "https://api.football-data.org/v4";
@@ -110,6 +113,30 @@ describe("competition services", () => {
     expect(lastCall().url).toBe(
       `${BASE_URL}/competitions/CLI/standings?season=2026`,
     );
+  });
+
+  it("getTodayMatches keeps only the project competitions", async () => {
+    const withWorldCup = {
+      ...todayMatches,
+      matches: [
+        ...todayMatches.matches,
+        {
+          ...todayMatches.matches[0],
+          id: 1,
+          competition: { ...todayMatches.matches[0]?.competition, code: "WC" },
+        },
+      ],
+    };
+    respondWith(withWorldCup);
+    const result = await getTodayMatches();
+    expect(lastCall()).toEqual({ url: `${BASE_URL}/matches`, revalidate: 600 });
+    expect(result).toHaveLength(10);
+    expect(result.some((m) => m.competition.code === "WC")).toBe(false);
+  });
+
+  it("loadTodayMatches returns an empty list when the api fails", async () => {
+    fetchMock.mockResolvedValue(new Response("{}", { status: 500 }));
+    await expect(loadTodayMatches()).resolves.toEqual([]);
   });
 
   it("encodes the competition code", async () => {

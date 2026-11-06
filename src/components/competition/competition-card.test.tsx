@@ -20,5 +20,6 @@ describe("CompetitionCard", () => {
     expect(link).toHaveTextContent("Brasileirão Série A");
     expect(link).toHaveTextContent("Brasil");
     expect(link).toHaveTextContent("Temporada 2026");
+    expect(link).toHaveTextContent("Rodada 34");
   });
 });
