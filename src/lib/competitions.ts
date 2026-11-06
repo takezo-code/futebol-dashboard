@@ -27,6 +27,7 @@ export type CompetitionConfig = {
   code: CompetitionCode;
   name: string;
   country: string;
+  preposition: "do" | "da";
   format: "league" | "cup";
   zones: Zone[];
 };
@@ -55,6 +56,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "BSA",
     name: "Brasileirão Série A",
     country: "Brasil",
+    preposition: "do",
     format: "league",
     zones: [
       { from: 1, to: 4, label: "Libertadores", tone: "continental" },
@@ -67,6 +69,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "CLI",
     name: "Copa Libertadores",
     country: "América do Sul",
+    preposition: "da",
     format: "cup",
     zones: [
       { from: 1, to: 2, label: "Oitavas de final", tone: "continental" },
@@ -77,6 +80,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "PL",
     name: "Premier League",
     country: "Inglaterra",
+    preposition: "da",
     format: "league",
     zones: topFourLeague(18, 20),
   },
@@ -84,6 +88,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "PD",
     name: "La Liga",
     country: "Espanha",
+    preposition: "da",
     format: "league",
     zones: topFourLeague(18, 20),
   },
@@ -91,6 +96,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "SA",
     name: "Serie A",
     country: "Itália",
+    preposition: "da",
     format: "league",
     zones: topFourLeague(18, 20),
   },
@@ -98,6 +104,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "BL1",
     name: "Bundesliga",
     country: "Alemanha",
+    preposition: "da",
     format: "league",
     zones: topFourLeague(17, 18),
   },
@@ -105,6 +112,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "FL1",
     name: "Ligue 1",
     country: "França",
+    preposition: "da",
     format: "league",
     zones: topThreeLeague,
   },
@@ -112,6 +120,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "CL",
     name: "Champions League",
     country: "Europa",
+    preposition: "da",
     format: "cup",
     zones: [
       { from: 1, to: 8, label: "Oitavas de final", tone: "continental" },
@@ -122,6 +131,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "DED",
     name: "Eredivisie",
     country: "Países Baixos",
+    preposition: "da",
     format: "league",
     zones: topThreeLeague,
   },
@@ -129,6 +139,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "PPL",
     name: "Primeira Liga",
     country: "Portugal",
+    preposition: "da",
     format: "league",
     zones: topThreeLeague,
   },
@@ -136,6 +147,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     code: "ELC",
     name: "Championship",
     country: "Inglaterra",
+    preposition: "do",
     format: "league",
     zones: [
       { from: 1, to: 2, label: "Acesso", tone: "continental" },
