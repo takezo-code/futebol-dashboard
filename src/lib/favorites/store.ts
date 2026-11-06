@@ -12,6 +12,10 @@ export const favoriteTeamSchema = z.object({
 export type FavoriteTeam = z.infer<typeof favoriteTeamSchema>;
 
 type FavoritesStorage = Pick<Storage, "getItem" | "setItem">;
+type StorageEvents = Pick<
+  EventTarget,
+  "addEventListener" | "removeEventListener"
+>;
 
 export type FavoritesStore = {
   getSnapshot(): FavoriteTeam[];
@@ -24,49 +28,88 @@ export type FavoritesStore = {
 
 const favoritesSchema = z.array(favoriteTeamSchema).max(FAVORITES_LIMIT);
 
+function parseFavorites(raw: string | null): FavoriteTeam[] {
+  if (raw === null) {
+    return [];
+  }
+  try {
+    const parsed = favoritesSchema.safeParse(JSON.parse(raw));
+    return parsed.success ? parsed.data : [];
+  } catch {
+    return [];
+  }
+}
+
 export function createFavoritesStore(
   storage: FavoritesStorage | null,
+  events: StorageEvents | null = null,
 ): FavoritesStore {
   let persistent = storage !== null;
+  let lastRaw: string | null = null;
   const listeners = new Set<() => void>();
 
-  function read(): FavoriteTeam[] {
+  function readRaw(): string | null {
     if (storage === null) {
-      return [];
+      return null;
     }
     try {
-      const raw = storage.getItem(FAVORITES_KEY);
-      if (raw === null) {
-        return [];
-      }
-      const parsed = favoritesSchema.safeParse(JSON.parse(raw));
-      return parsed.success ? parsed.data : [];
+      return storage.getItem(FAVORITES_KEY);
     } catch {
       persistent = false;
-      return [];
+      return null;
     }
   }
 
-  let favorites = read();
+  lastRaw = readRaw();
+  let favorites = parseFavorites(lastRaw);
+
+  function notify() {
+    listeners.forEach((listener) => listener());
+  }
 
   function commit(next: FavoriteTeam[]) {
     favorites = next;
     if (storage !== null) {
+      const raw = JSON.stringify(next);
       try {
-        storage.setItem(FAVORITES_KEY, JSON.stringify(next));
+        storage.setItem(FAVORITES_KEY, raw);
+        lastRaw = raw;
       } catch {
         persistent = false;
       }
     }
-    listeners.forEach((listener) => listener());
+    notify();
+  }
+
+  function reloadFromStorage() {
+    const raw = readRaw();
+    if (raw === lastRaw) {
+      return;
+    }
+    lastRaw = raw;
+    favorites = parseFavorites(raw);
+    notify();
+  }
+
+  function onStorage(event: Event) {
+    const key = "key" in event ? event.key : undefined;
+    if (key === null || key === FAVORITES_KEY) {
+      reloadFromStorage();
+    }
   }
 
   return {
     getSnapshot: () => favorites,
     subscribe(listener) {
       listeners.add(listener);
+      if (listeners.size === 1) {
+        events?.addEventListener("storage", onStorage);
+      }
       return () => {
         listeners.delete(listener);
+        if (listeners.size === 0) {
+          events?.removeEventListener("storage", onStorage);
+        }
       };
     },
     add(team) {
@@ -85,9 +128,6 @@ export function createFavoritesStore(
       }
     },
     isPersistent: () => persistent,
-    reloadFromStorage() {
-      favorites = read();
-      listeners.forEach((listener) => listener());
-    },
+    reloadFromStorage,
   };
 }

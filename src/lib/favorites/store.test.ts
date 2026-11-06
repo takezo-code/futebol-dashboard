@@ -48,11 +48,15 @@ describe("createFavoritesStore", () => {
     const valid = memoryStorage({ [FAVORITES_KEY]: JSON.stringify([team(7)]) });
     expect(createFavoritesStore(valid).getSnapshot()).toEqual([team(7)]);
     const broken = memoryStorage({ [FAVORITES_KEY]: "{not json" });
-    expect(createFavoritesStore(broken).getSnapshot()).toEqual([]);
+    const brokenStore = createFavoritesStore(broken);
+    expect(brokenStore.getSnapshot()).toEqual([]);
+    expect(brokenStore.isPersistent()).toBe(true);
     const wrong = memoryStorage({
       [FAVORITES_KEY]: JSON.stringify([{ foo: 1 }]),
     });
-    expect(createFavoritesStore(wrong).getSnapshot()).toEqual([]);
+    const wrongStore = createFavoritesStore(wrong);
+    expect(wrongStore.getSnapshot()).toEqual([]);
+    expect(wrongStore.isPersistent()).toBe(true);
   });
 
   it("keeps working in memory when reading throws", () => {
@@ -107,5 +111,44 @@ describe("createFavoritesStore", () => {
     store.reloadFromStorage();
     expect(store.getSnapshot()).toEqual([team(3)]);
     expect(listener).toHaveBeenCalledTimes(1);
+  });
+
+  it("listens to other tabs once, including clear()", () => {
+    const storage = memoryStorage({
+      [FAVORITES_KEY]: JSON.stringify([team(1)]),
+    });
+    const events = new EventTarget();
+    const addSpy = vi.spyOn(events, "addEventListener");
+    const removeSpy = vi.spyOn(events, "removeEventListener");
+    const store = createFavoritesStore(storage, events);
+    const listeners = [vi.fn(), vi.fn(), vi.fn()];
+    const unsubscribers = listeners.map((listener) =>
+      store.subscribe(listener),
+    );
+    expect(addSpy).toHaveBeenCalledTimes(1);
+
+    storage.data.clear();
+    events.dispatchEvent(Object.assign(new Event("storage"), { key: null }));
+    expect(store.getSnapshot()).toEqual([]);
+    listeners.forEach((listener) => expect(listener).toHaveBeenCalledTimes(1));
+
+    events.dispatchEvent(Object.assign(new Event("storage"), { key: "other" }));
+    listeners.forEach((listener) => expect(listener).toHaveBeenCalledTimes(1));
+
+    unsubscribers.forEach((unsubscribe) => unsubscribe());
+    expect(removeSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not notify when storage did not change", () => {
+    const storage = memoryStorage({
+      [FAVORITES_KEY]: JSON.stringify([team(1)]),
+    });
+    const store = createFavoritesStore(storage);
+    const listener = vi.fn();
+    store.subscribe(listener);
+    const before = store.getSnapshot();
+    store.reloadFromStorage();
+    expect(listener).not.toHaveBeenCalled();
+    expect(store.getSnapshot()).toBe(before);
   });
 });

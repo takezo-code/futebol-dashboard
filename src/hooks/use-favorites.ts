@@ -1,8 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useSyncExternalStore } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 import {
-  FAVORITES_KEY,
   FAVORITES_LIMIT,
   createFavoritesStore,
   type FavoriteTeam,
@@ -18,7 +17,9 @@ function browserStorage(): Storage | null {
 }
 
 export const favoritesStore: FavoritesStore | null =
-  typeof window === "undefined" ? null : createFavoritesStore(browserStorage());
+  typeof window === "undefined"
+    ? null
+    : createFavoritesStore(browserStorage(), window);
 
 const EMPTY: FavoriteTeam[] = [];
 const noop = () => () => {};
@@ -37,16 +38,6 @@ export function useFavorites(): UseFavorites {
     favoritesStore?.getSnapshot ?? (() => EMPTY),
     () => EMPTY,
   );
-
-  useEffect(() => {
-    function onStorage(event: StorageEvent) {
-      if (event.key === FAVORITES_KEY) {
-        favoritesStore?.reloadFromStorage();
-      }
-    }
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
 
   const isFavorite = useCallback(
     (id: number) => favorites.some((favorite) => favorite.id === id),
