@@ -2,3 +2,4 @@ pnpm-lock.yaml
 .next
 node_modules
 next-env.d.ts
+src/lib/football-api/__fixtures__

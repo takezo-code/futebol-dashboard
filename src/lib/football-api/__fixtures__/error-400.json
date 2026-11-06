@@ -1,0 +1,4 @@
+{
+  "message": "Argument 'id' is expected to be an integer in a specified range.",
+  "errorCode": 400
+}

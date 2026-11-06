@@ -1,0 +1,295 @@
+{
+  "area": {
+    "id": 2032,
+    "name": "Brazil",
+    "code": "BRA",
+    "flag": "https://crests.football-data.org/764.svg"
+  },
+  "id": 1765,
+  "name": "Fluminense FC",
+  "shortName": "Fluminense",
+  "tla": "FLU",
+  "crest": "https://crests.football-data.org/1765.png",
+  "address": "Rua Álvaro Chaves 41, Bairro Laranjeiras Rio de Janeiro, RJ 22231-220",
+  "website": "http://www.fluminense.com.br",
+  "founded": 1902,
+  "clubColors": "Maroon / Green / White",
+  "venue": "Estadio Jornalista Mário Filho",
+  "runningCompetitions": [
+    {
+      "id": 2152,
+      "name": "Copa Libertadores",
+      "code": "CLI",
+      "type": "CUP",
+      "emblem": "https://crests.football-data.org/CLI.svg"
+    },
+    {
+      "id": 2013,
+      "name": "Campeonato Brasileiro Série A",
+      "code": "BSA",
+      "type": "LEAGUE",
+      "emblem": "https://crests.football-data.org/bsa.png"
+    }
+  ],
+  "coach": {
+    "id": 127655,
+    "firstName": "",
+    "lastName": "Marcão",
+    "name": "Marcão",
+    "dateOfBirth": "1972-07-22",
+    "nationality": "Brazil",
+    "contract": {
+      "start": null,
+      "until": null
+    }
+  },
+  "squad": [
+    {
+      "id": 1230,
+      "name": "Fábio",
+      "position": "Goalkeeper",
+      "dateOfBirth": "1980-09-30",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 44235,
+      "name": "Vitor Eudes",
+      "position": "Goalkeeper",
+      "dateOfBirth": "1998-10-21",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 136654,
+      "name": "Marcelo Pitaluga",
+      "position": "Goalkeeper",
+      "dateOfBirth": "2002-12-20",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 1107,
+      "name": "Samuel Xavier",
+      "position": "Defence",
+      "dateOfBirth": "1990-06-06",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 1215,
+      "name": "Igor Rabello",
+      "position": "Defence",
+      "dateOfBirth": "1995-04-28",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 1546,
+      "name": "Renê",
+      "position": "Defence",
+      "dateOfBirth": "1992-09-14",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 3224,
+      "name": "Thiago Silva",
+      "position": "Defence",
+      "dateOfBirth": "1984-09-22",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 12594,
+      "name": "Guga",
+      "position": "Defence",
+      "dateOfBirth": "1998-08-29",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 15929,
+      "name": "Guilherme Arana",
+      "position": "Defence",
+      "dateOfBirth": "1997-04-14",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 97470,
+      "name": "Ignácio",
+      "position": "Defence",
+      "dateOfBirth": "1996-12-01",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 98654,
+      "name": "Juan Freytes",
+      "position": "Defence",
+      "dateOfBirth": "2000-01-11",
+      "nationality": "Argentina"
+    },
+    {
+      "id": 104480,
+      "name": "Julián Millán",
+      "position": "Defence",
+      "dateOfBirth": "1998-03-27",
+      "nationality": "Colombia"
+    },
+    {
+      "id": 179146,
+      "name": "Jhonny",
+      "position": "Defence",
+      "dateOfBirth": "2002-04-16",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 250800,
+      "name": "Jemmes",
+      "position": "Defence",
+      "dateOfBirth": "2000-04-09",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 277752,
+      "name": "Leonardo Jance",
+      "position": "Defence",
+      "dateOfBirth": "2005-03-23",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 76,
+      "name": "Ganso",
+      "position": "Midfield",
+      "dateOfBirth": "1989-10-12",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 1154,
+      "name": "Alisson",
+      "position": "Midfield",
+      "dateOfBirth": "1993-06-25",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 8503,
+      "name": "Otávio",
+      "position": "Midfield",
+      "dateOfBirth": "1994-05-04",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 61369,
+      "name": "Nonato",
+      "position": "Midfield",
+      "dateOfBirth": "1998-03-03",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 76910,
+      "name": "Luciano Acosta",
+      "position": "Midfield",
+      "dateOfBirth": "1994-05-31",
+      "nationality": "Argentina"
+    },
+    {
+      "id": 77159,
+      "name": "Jefferson Savarino",
+      "position": "Midfield",
+      "dateOfBirth": "1996-11-11",
+      "nationality": "Venezuela"
+    },
+    {
+      "id": 145985,
+      "name": "Hércules",
+      "position": "Midfield",
+      "dateOfBirth": "2000-10-20",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 151046,
+      "name": "Matheus Martinelli",
+      "position": "Midfield",
+      "dateOfBirth": "2001-05-10",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 178998,
+      "name": "Yago",
+      "position": "Midfield",
+      "dateOfBirth": "2001-08-02",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 291299,
+      "name": "Luis Fernando",
+      "position": "Midfield",
+      "dateOfBirth": "2005-02-18",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 21689,
+      "name": "Hulk",
+      "position": "Offence",
+      "dateOfBirth": "1986-07-25",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 21951,
+      "name": "Germán Cano",
+      "position": "Offence",
+      "dateOfBirth": "1988-02-02",
+      "nationality": "Argentina"
+    },
+    {
+      "id": 23333,
+      "name": "Yeferson Soteldo",
+      "position": "Offence",
+      "dateOfBirth": "1997-06-30",
+      "nationality": "Venezuela"
+    },
+    {
+      "id": 28614,
+      "name": "Agustín Canobbio",
+      "position": "Offence",
+      "dateOfBirth": "1998-10-01",
+      "nationality": "Uruguay"
+    },
+    {
+      "id": 157533,
+      "name": "John Kennedy",
+      "position": "Offence",
+      "dateOfBirth": "2002-05-18",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 181336,
+      "name": "Kevin Serna",
+      "position": "Offence",
+      "dateOfBirth": "1997-12-22",
+      "nationality": "Colombia"
+    },
+    {
+      "id": 191363,
+      "name": "Rodrigo Castillo",
+      "position": "Offence",
+      "dateOfBirth": "1999-02-26",
+      "nationality": "Argentina"
+    },
+    {
+      "id": 221342,
+      "name": "Matheus Reis",
+      "position": "Offence",
+      "dateOfBirth": "2007-04-02",
+      "nationality": "Mexico"
+    },
+    {
+      "id": 273195,
+      "name": "Riquelme Felipe",
+      "position": "Offence",
+      "dateOfBirth": "2007-03-13",
+      "nationality": "Brazil"
+    },
+    {
+      "id": 278024,
+      "name": "Wesley Natã",
+      "position": "Offence",
+      "dateOfBirth": "2008-04-18",
+      "nationality": "Brazil"
+    }
+  ],
+  "staff": [],
+  "lastUpdated": "2024-07-29T17:24:37Z"
+}

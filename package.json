@@ -2,6 +2,7 @@
   "name": "futebol-dashboard",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "fixtures": "node --env-file-if-exists=.env.local scripts/fetch-fixtures.ts"
   },
   "dependencies": {
     "next": "15.5.29",
