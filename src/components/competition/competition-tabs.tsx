@@ -37,7 +37,7 @@ const TABS: {
   },
 ];
 
-const TITLE_SUFFIX = "Futebol Dashboard";
+const TITLE_SUFFIX = "Painel da Bola";
 
 export function competitionMetadata(
   code: string,

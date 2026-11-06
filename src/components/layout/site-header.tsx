@@ -10,7 +10,7 @@ export function SiteHeader() {
           href="/"
           className="font-display text-brand text-xl font-bold tracking-tight"
         >
-          Futebol Dashboard
+          Painel da Bola
         </Link>
         <nav aria-label="Principal" className="flex items-center gap-1">
           <Link

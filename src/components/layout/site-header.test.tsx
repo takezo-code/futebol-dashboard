@@ -23,7 +23,7 @@ describe("SiteHeader", () => {
   it("has a home link and a theme toggle", () => {
     render(<SiteHeader />);
     expect(
-      screen.getByRole("link", { name: "Futebol Dashboard" }),
+      screen.getByRole("link", { name: "Painel da Bola" }),
     ).toHaveAttribute("href", "/");
     expect(
       screen.getByRole("button", { name: "Alternar tema" }),

@@ -28,28 +28,28 @@ describe("CompetitionTabs", () => {
 describe("competitionMetadata", () => {
   it("builds the page title from the tab and competition", () => {
     expect(competitionMetadata("BSA", "standings").title).toBe(
-      "Classificação do Brasileirão Série A | Futebol Dashboard",
+      "Classificação do Brasileirão Série A | Painel da Bola",
     );
     expect(competitionMetadata("CLI", "scorers").title).toBe(
-      "Artilharia da Copa Libertadores | Futebol Dashboard",
+      "Artilharia da Copa Libertadores | Painel da Bola",
     );
   });
 
   it("titles the overview page", () => {
     expect(competitionMetadata("BSA", "overview").title).toBe(
-      "Visão geral do Brasileirão Série A | Futebol Dashboard",
+      "Visão geral do Brasileirão Série A | Painel da Bola",
     );
   });
 
   it("titles the comparison page", () => {
     expect(competitionMetadata("BSA", "compare").title).toBe(
-      "Comparar times do Brasileirão Série A | Futebol Dashboard",
+      "Comparar times do Brasileirão Série A | Painel da Bola",
     );
   });
 
   it("returns a generic title for unknown codes", () => {
     expect(competitionMetadata("WC", "matches").title).toBe(
-      "Competição não encontrada | Futebol Dashboard",
+      "Competição não encontrada | Painel da Bola",
     );
   });
 });

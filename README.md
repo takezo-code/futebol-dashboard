@@ -1,6 +1,6 @@
-# Futebol Dashboard
+# Painel da Bola
 
-[![CI](https://github.com/takezo-code/futebol-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/takezo-code/futebol-dashboard/actions/workflows/ci.yml)
+[![CI](https://github.com/takezo-code/painel-da-bola/actions/workflows/ci.yml/badge.svg)](https://github.com/takezo-code/painel-da-bola/actions/workflows/ci.yml)
 
 Painel de futebol em Next.js com classificação, jogos, artilharia, comparador de times e times favoritos das principais ligas e copas de clubes, usando dados da football-data.org.
 
@@ -40,8 +40,8 @@ Next.js 15 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS 4 · 
 ## Como rodar localmente
 
 ```bash
-git clone https://github.com/takezo-code/futebol-dashboard.git
-cd futebol-dashboard
+git clone https://github.com/takezo-code/painel-da-bola.git
+cd painel-da-bola
 pnpm install
 cp .env.example .env.local
 ```

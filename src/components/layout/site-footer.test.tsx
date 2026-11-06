@@ -18,7 +18,7 @@ describe("SiteFooter", () => {
       screen.getByRole("link", { name: "Código no GitHub" }),
     ).toHaveAttribute(
       "href",
-      "https://github.com/takezo-code/futebol-dashboard",
+      "https://github.com/takezo-code/painel-da-bola",
     );
     expect(screen.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
       "href",

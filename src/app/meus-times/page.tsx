@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FavoritesList } from "@/components/favorites/favorites-list";
 
 export const metadata: Metadata = {
-  title: "Meus times | Futebol Dashboard",
+  title: "Meus times | Painel da Bola",
   description: "Último resultado e próximos jogos dos seus times favoritos.",
 };
 

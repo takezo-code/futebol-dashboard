@@ -5,7 +5,7 @@ export default function NotFound() {
     <section className="flex flex-col items-start gap-4 py-12">
       <h1 className="font-display text-4xl font-bold">Página não encontrada</h1>
       <p className="text-muted">
-        Essa competição ou página não existe no Futebol Dashboard.
+        Essa competição ou página não existe no Painel da Bola.
       </p>
       <Link
         href="/"

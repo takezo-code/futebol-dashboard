@@ -18,7 +18,7 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Futebol Dashboard",
+  title: "Painel da Bola",
   description:
     "Classificação, jogos e artilharia das principais ligas e copas de clubes.",
 };

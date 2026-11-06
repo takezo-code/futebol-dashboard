@@ -9,7 +9,7 @@ export function SiteFooter() {
       </p>
       <p className="mt-2 flex justify-center gap-4">
         <a
-          href="https://github.com/takezo-code/futebol-dashboard"
+          href="https://github.com/takezo-code/painel-da-bola"
           className={linkClass}
         >
           Código no GitHub

@@ -30,20 +30,20 @@ export async function generateMetadata({
   const { id } = await params;
   const teamId = parseTeamId(id);
   if (teamId === null) {
-    return { title: "Time não encontrado | Futebol Dashboard" };
+    return { title: "Time não encontrado | Painel da Bola" };
   }
   try {
     const team = await getTeam(teamId);
     return {
-      title: `${team.name} | Futebol Dashboard`,
+      title: `${team.name} | Painel da Bola`,
       description: `Elenco, jogos e estatísticas do ${team.name} na temporada atual.`,
     };
   } catch (error) {
     return {
       title:
         error instanceof NotFoundError
-          ? "Time não encontrado | Futebol Dashboard"
-          : "Time | Futebol Dashboard",
+          ? "Time não encontrado | Painel da Bola"
+          : "Time | Painel da Bola",
     };
   }
 }
