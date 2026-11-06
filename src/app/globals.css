@@ -17,6 +17,8 @@
   --zone-continental: #2b62b3;
   --zone-secondary: #8c6d1f;
   --zone-relegation: #c2372e;
+  --pitch: #1e6b45;
+  --pitch-stripe: #23794f;
   --chart-1: #178048;
   --chart-a: #2b62b3;
   --chart-b: #d4761f;
@@ -37,6 +39,8 @@
   --zone-continental: #4a86d9;
   --zone-secondary: #c9a54a;
   --zone-relegation: #e5564b;
+  --pitch: #17543a;
+  --pitch-stripe: #1b6043;
   --chart-1: #2e9a58;
   --chart-a: #5b8fe0;
   --chart-b: #d07420;
@@ -57,6 +61,8 @@
   --color-zone-continental: var(--zone-continental);
   --color-zone-secondary: var(--zone-secondary);
   --color-zone-relegation: var(--zone-relegation);
+  --color-pitch: var(--pitch);
+  --color-pitch-stripe: var(--pitch-stripe);
   --color-chart-1: var(--chart-1);
   --color-chart-a: var(--chart-a);
   --color-chart-b: var(--chart-b);

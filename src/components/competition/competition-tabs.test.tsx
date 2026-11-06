@@ -8,7 +8,11 @@ describe("CompetitionTabs", () => {
     const standings = screen.getByRole("link", { name: "Classificação" });
     const matches = screen.getByRole("link", { name: "Jogos" });
     const scorers = screen.getByRole("link", { name: "Artilharia" });
-    expect(standings).toHaveAttribute("href", "/competicoes/BSA");
+    expect(standings).toHaveAttribute("href", "/competicoes/BSA/classificacao");
+    expect(screen.getByRole("link", { name: "Visão geral" })).toHaveAttribute(
+      "href",
+      "/competicoes/BSA",
+    );
     expect(matches).toHaveAttribute("href", "/competicoes/BSA/jogos");
     expect(scorers).toHaveAttribute("href", "/competicoes/BSA/artilharia");
     expect(matches).toHaveAttribute("aria-current", "page");
@@ -28,6 +32,12 @@ describe("competitionMetadata", () => {
     );
     expect(competitionMetadata("CLI", "scorers").title).toBe(
       "Artilharia da Copa Libertadores | Futebol Dashboard",
+    );
+  });
+
+  it("titles the overview page", () => {
+    expect(competitionMetadata("BSA", "overview").title).toBe(
+      "Visão geral do Brasileirão Série A | Futebol Dashboard",
     );
   });
 

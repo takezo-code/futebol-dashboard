@@ -6,7 +6,8 @@ import {
   type CompetitionCode,
 } from "@/lib/competitions";
 
-export type CompetitionTab = "standings" | "matches" | "scorers" | "compare";
+export type CompetitionTab =
+  "overview" | "standings" | "matches" | "scorers" | "compare";
 
 const TABS: {
   id: CompetitionTab;
@@ -14,7 +15,13 @@ const TABS: {
   title: string;
   path: string;
 }[] = [
-  { id: "standings", label: "Classificação", title: "Classificação", path: "" },
+  { id: "overview", label: "Visão geral", title: "Visão geral", path: "" },
+  {
+    id: "standings",
+    label: "Classificação",
+    title: "Classificação",
+    path: "/classificacao",
+  },
   { id: "matches", label: "Jogos", title: "Jogos", path: "/jogos" },
   {
     id: "scorers",
