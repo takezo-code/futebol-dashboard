@@ -7,6 +7,9 @@ import {
 } from "@/lib/format";
 import { scoreLine } from "@/lib/stats/rounds";
 
+const SCORED_STATUSES = new Set(["FINISHED", "IN_PLAY", "PAUSED", "AWARDED"]);
+const OFF_STATUSES = new Set(["CANCELLED", "POSTPONED", "SUSPENDED"]);
+
 function teamName(team: MatchTeam): string {
   return team.shortName ?? team.name ?? "A definir";
 }
@@ -37,7 +40,9 @@ function TeamSide({
 
 export function MatchCard({ match }: { match: Match }) {
   const { home, away, penalties } = scoreLine(match);
-  const hasScore = home !== null && away !== null;
+  const hasScore =
+    SCORED_STATUSES.has(match.status) && home !== null && away !== null;
+  const isOff = OFF_STATUSES.has(match.status);
 
   return (
     <article className="border-border bg-surface flex flex-col gap-2 rounded-lg border p-4">
@@ -57,7 +62,7 @@ export function MatchCard({ match }: { match: Match }) {
           </span>
         ) : (
           <span className="font-display text-muted px-3 text-2xl tabular-nums">
-            {formatMatchTime(match.utcDate)}
+            {isOff ? "–" : formatMatchTime(match.utcDate)}
           </span>
         )}
         <TeamSide team={match.awayTeam} align="start" />

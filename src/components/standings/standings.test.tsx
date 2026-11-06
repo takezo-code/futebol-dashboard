@@ -36,6 +36,9 @@ describe("StandingsTable", () => {
     expect(within(first).getByText("76")).toBeInTheDocument();
     expect(within(first).getByText("+42")).toBeInTheDocument();
     expect(bodyRows[17]).toHaveAttribute("data-zone", "relegation");
+    expect(
+      within(bodyRows[17] as HTMLElement).getByText("Rebaixamento"),
+    ).toHaveClass("sr-only");
     expect(bodyRows[13]).not.toHaveAttribute("data-zone");
   });
 });

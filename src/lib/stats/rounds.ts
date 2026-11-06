@@ -18,6 +18,8 @@ const MATCHDAY_STAGES = new Set([
   "GROUP_STAGE",
 ]);
 
+const PENDING_STATUSES = new Set(["SCHEDULED", "TIMED", "IN_PLAY", "PAUSED"]);
+
 const STAGE_LABELS: Record<string, string> = {
   ROUND_1: "Fase preliminar 1",
   ROUND_2: "Fase preliminar 2",
@@ -76,8 +78,8 @@ export function pickRound(
     return rounds[0] ?? null;
   }
   const started = rounds[startedIndex];
-  const hasPendingMatch = started?.matches.some(
-    (match) => match.status !== "FINISHED",
+  const hasPendingMatch = started?.matches.some((match) =>
+    PENDING_STATUSES.has(match.status),
   );
   if (hasPendingMatch) {
     return started ?? null;

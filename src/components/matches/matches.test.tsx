@@ -43,6 +43,14 @@ describe("MatchCard", () => {
     expect(screen.getByText("pên. 5–3")).toBeInTheDocument();
   });
 
+  it("hides the score of a cancelled match", () => {
+    const match = findMatch((m) => m.status === "CANCELLED");
+    render(<MatchCard match={match} />);
+    expect(screen.queryByLabelText(/^Placar/)).toBeNull();
+    expect(screen.getByText("Cancelado")).toBeInTheDocument();
+    expect(screen.getByText("–")).toBeInTheDocument();
+  });
+
   it("shows A definir for teams not decided yet", () => {
     const base = findMatch((m) => m.status === "TIMED");
     const match = {

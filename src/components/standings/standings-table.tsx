@@ -85,6 +85,9 @@ export function StandingsTable({
                     <span className="font-display text-base tabular-nums">
                       {row.position}
                     </span>
+                    {zone ? (
+                      <span className="sr-only">{zone.label}</span>
+                    ) : null}
                   </span>
                 </td>
                 <th

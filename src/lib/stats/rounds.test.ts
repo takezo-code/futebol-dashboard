@@ -60,6 +60,17 @@ describe("pickRound", () => {
     ).toBe("38");
   });
 
+  it("moves on when the latest round only has cancelled games left", () => {
+    const withCancelled = bsaMatches.map((m) =>
+      m.matchday === 34 && m.status !== "FINISHED"
+        ? { ...m, status: "CANCELLED" }
+        : m,
+    );
+    expect(pickRound(buildRounds(withCancelled), undefined, now)?.key).toBe(
+      "35",
+    );
+  });
+
   it("returns null without rounds", () => {
     expect(pickRound([], undefined, now)).toBeNull();
   });
