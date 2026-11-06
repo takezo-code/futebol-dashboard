@@ -21,10 +21,16 @@ function TeamSide({
   const name = teamName(team);
   return (
     <span
-      className={`flex min-w-0 items-center gap-2 ${align === "end" ? "flex-row-reverse text-right" : ""}`}
+      className={`flex min-w-0 flex-col items-center gap-1.5 text-center sm:gap-2 ${
+        align === "end"
+          ? "sm:flex-row-reverse sm:text-right"
+          : "sm:flex-row sm:text-left"
+      }`}
     >
       <Crest src={team.crest} name={name} size={28} />
-      <span className="truncate font-medium">{name}</span>
+      <span className="line-clamp-2 text-sm leading-tight font-medium break-words sm:text-base">
+        {name}
+      </span>
     </span>
   );
 }

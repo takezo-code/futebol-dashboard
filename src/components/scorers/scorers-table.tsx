@@ -30,11 +30,11 @@ export function ScorersTable({ scorers }: { scorers: Scorer[] }) {
             >
               Jogador
             </th>
-            <th scope="col" className="px-3 py-2 text-left font-medium">
-              Time
-            </th>
             <th scope="col" className="px-2 py-2 text-right font-medium">
               Gols
+            </th>
+            <th scope="col" className="px-3 py-2 text-left font-medium">
+              Time
             </th>
             <th scope="col" className="px-2 py-2 text-right font-medium">
               <abbr title="Assistências" className="no-underline">
@@ -70,14 +70,14 @@ export function ScorersTable({ scorers }: { scorers: Scorer[] }) {
                 >
                   {scorer.player.name}
                 </th>
+                <td className="font-display px-2 text-right text-lg font-bold tabular-nums">
+                  {scorer.goals}
+                </td>
                 <td className="px-3">
                   <span className="flex items-center gap-2 whitespace-nowrap">
                     <Crest src={scorer.team.crest} name={teamName} size={20} />
                     {teamName}
                   </span>
-                </td>
-                <td className="font-display px-2 text-right text-lg font-bold tabular-nums">
-                  {scorer.goals}
                 </td>
                 <td className="font-display px-2 text-right text-base tabular-nums">
                   {orDash(scorer.assists)}
