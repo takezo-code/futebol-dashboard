@@ -80,6 +80,9 @@ function rateLimitHeaders(headers: Headers): Record<string, string> {
 
 await mkdir(OUTPUT_DIR, { recursive: true });
 
+const todayMatches = await call("/matches");
+await save("matches-today.json", todayMatches.body);
+
 const competitions = await call("/competitions");
 await save("competitions.json", competitions.body);
 
