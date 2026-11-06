@@ -68,6 +68,7 @@ export default async function ComparePage({ params, searchParams }: PageProps) {
       {picked ? (
         <>
           <TeamPicker
+            key={`${picked.a.team.id}-${picked.b.team.id}`}
             code={code}
             rows={rows}
             a={picked.a.team.id}

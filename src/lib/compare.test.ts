@@ -28,6 +28,7 @@ describe("pickComparedTeams", () => {
   it("ignores ids that are invalid or outside the competition", () => {
     expect(names("999", undefined)).toEqual(["Flamengo", "Palmeiras"]);
     expect(names("abc", "xyz")).toEqual(["Flamengo", "Palmeiras"]);
+    expect(names("abc", "1783")).toEqual(["Palmeiras", "Flamengo"]);
   });
 
   it("needs at least two teams", () => {

@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import bsaSeason from "@/lib/football-api/__fixtures__/matches-bsa-season.json";
 import standingsBsa from "@/lib/football-api/__fixtures__/standings-bsa.json";
@@ -12,8 +12,10 @@ import { CompareTable } from "./compare-table";
 import { HeadToHeadList } from "./head-to-head-list";
 import { TeamPicker } from "./team-picker";
 
+const push = vi.fn();
+
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn() }),
+  useRouter: () => ({ push }),
 }));
 
 const rows =
@@ -44,6 +46,26 @@ describe("TeamPicker", () => {
     expect(
       within(second).getByRole("option", { name: "Flamengo" }),
     ).toBeDisabled();
+  });
+});
+
+describe("TeamPicker navigation", () => {
+  it("shows the new team right away and updates the url", () => {
+    render(
+      <TeamPicker
+        code="BSA"
+        rows={rows}
+        a={picked.a.team.id}
+        b={picked.b.team.id}
+      />,
+    );
+    const first = screen.getByRole("combobox", { name: "Time 1" });
+    fireEvent.change(first, { target: { value: "1765" } });
+    expect(first).toHaveValue("1765");
+    expect(push).toHaveBeenCalledWith(
+      `/competicoes/BSA/comparar?a=1765&b=${picked.b.team.id}`,
+      { scroll: false },
+    );
   });
 });
 

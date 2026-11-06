@@ -17,6 +17,13 @@ describe("ScorersChart", () => {
     ).toBeInTheDocument();
   });
 
+  it("titles the chart with the real count", () => {
+    render(<ScorersChart scorers={scorers.slice(0, 3)} />);
+    expect(
+      screen.getByRole("heading", { name: "Os 3 maiores artilheiros" }),
+    ).toBeInTheDocument();
+  });
+
   it("renders nothing without scorers", () => {
     const { container } = render(<ScorersChart scorers={[]} />);
     expect(container).toBeEmptyDOMElement();

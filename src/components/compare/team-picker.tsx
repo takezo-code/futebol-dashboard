@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import type { CompetitionCode } from "@/lib/competitions";
 import type { StandingRow } from "@/lib/football-api/types";
 
@@ -57,6 +58,8 @@ function TeamSelect({
 
 export function TeamPicker({ code, rows, a, b }: TeamPickerProps) {
   const router = useRouter();
+  const [selected, setSelected] = useState({ a, b });
+  const [isPending, startTransition] = useTransition();
   const teams = rows
     .map((row) => ({
       id: row.team.id,
@@ -65,28 +68,34 @@ export function TeamPicker({ code, rows, a, b }: TeamPickerProps) {
     .sort((x, y) => x.name.localeCompare(y.name, "pt-BR"));
 
   function go(nextA: number, nextB: number) {
-    router.push(`/competicoes/${code}/comparar?a=${nextA}&b=${nextB}`, {
-      scroll: false,
+    setSelected({ a: nextA, b: nextB });
+    startTransition(() => {
+      router.push(`/competicoes/${code}/comparar?a=${nextA}&b=${nextB}`, {
+        scroll: false,
+      });
     });
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row">
+    <div
+      aria-busy={isPending}
+      className={`flex flex-col gap-3 transition-opacity sm:flex-row ${isPending ? "opacity-60" : ""}`}
+    >
       <TeamSelect
         id="time-1"
         label="Time 1"
         teams={teams}
-        value={a}
-        blocked={b}
-        onPick={(teamId) => go(teamId, b)}
+        value={selected.a}
+        blocked={selected.b}
+        onPick={(teamId) => go(teamId, selected.b)}
       />
       <TeamSelect
         id="time-2"
         label="Time 2"
         teams={teams}
-        value={b}
-        blocked={a}
-        onPick={(teamId) => go(a, teamId)}
+        value={selected.b}
+        blocked={selected.a}
+        onPick={(teamId) => go(selected.a, teamId)}
       />
     </div>
   );

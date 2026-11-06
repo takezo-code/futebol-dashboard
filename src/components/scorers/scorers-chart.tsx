@@ -50,7 +50,7 @@ export function ScorersChart({ scorers }: { scorers: Scorer[] }) {
         id="grafico-artilharia"
         className="font-display text-xl font-semibold"
       >
-        Os 10 maiores artilheiros
+        {`Os ${rows.length} maiores artilheiros`}
       </h2>
       <div
         role="img"
