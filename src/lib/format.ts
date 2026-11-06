@@ -96,3 +96,42 @@ export function translateClubColors(value: string | null): string | null {
   }
   return `${colors.slice(0, -1).join(", ")} e ${colors.at(-1)}`;
 }
+
+const dayKeyFormatter = new Intl.DateTimeFormat("en-CA", {
+  timeZone: TIME_ZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+const longWeekdayFormatter = new Intl.DateTimeFormat("pt-BR", {
+  timeZone: TIME_ZONE,
+  weekday: "long",
+});
+
+export function brasiliaDayKey(date: Date): string {
+  return dayKeyFormatter.format(date);
+}
+
+function shiftDayKey(key: string, days: number): string {
+  const date = new Date(`${key}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+export function formatDayHeading(utcDate: string, now: Date): string {
+  const date = new Date(utcDate);
+  const key = brasiliaDayKey(date);
+  const today = brasiliaDayKey(now);
+  if (key === today) {
+    return "Hoje";
+  }
+  if (key === shiftDayKey(today, 1)) {
+    return "Amanhã";
+  }
+  if (key === shiftDayKey(today, -1)) {
+    return "Ontem";
+  }
+  const weekday = longWeekdayFormatter.format(date);
+  return `${weekday.charAt(0).toUpperCase()}${weekday.slice(1)}, ${dayMonthFormatter.format(date)}`;
+}
