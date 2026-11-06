@@ -105,3 +105,18 @@ export function scoreLine(match: Match): ScoreLine {
     penalties: { home: penalties.home, away: penalties.away },
   };
 }
+
+const PENDING_IN_ROUND = new Set(["SCHEDULED", "TIMED", "IN_PLAY", "PAUSED"]);
+const LOOKAHEAD_MS = 7 * 86_400_000;
+
+export function isRoundInProgress(round: Round, now: Date): boolean {
+  const first = round.matches[0];
+  if (!first) {
+    return false;
+  }
+  const startsSoon = Date.parse(first.utcDate) <= now.getTime() + LOOKAHEAD_MS;
+  return (
+    startsSoon &&
+    round.matches.some((match) => PENDING_IN_ROUND.has(match.status))
+  );
+}

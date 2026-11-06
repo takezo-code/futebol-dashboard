@@ -39,4 +39,17 @@ describe("ScorersTable", () => {
       screen.getByText("A artilharia ainda não foi divulgada."),
     ).toBeInTheDocument();
   });
+
+  it("gives tied scorers the same position", () => {
+    const tied = scorers.slice(0, 3).map((scorer, index) => ({
+      ...scorer,
+      goals: index === 0 ? 10 : 8,
+    }));
+    render(<ScorersTable scorers={tied} />);
+    const positions = screen
+      .getAllByRole("row")
+      .slice(1)
+      .map((row) => row.querySelector("td")?.textContent);
+    expect(positions).toEqual(["1", "2", "2"]);
+  });
 });

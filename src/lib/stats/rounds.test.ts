@@ -3,7 +3,7 @@ import bsaSeason from "@/lib/football-api/__fixtures__/matches-bsa-season.json";
 import cliSeason from "@/lib/football-api/__fixtures__/matches-cli.json";
 import { matchesResponseSchema } from "@/lib/football-api/schemas";
 import type { Match } from "@/lib/football-api/types";
-import { buildRounds, pickRound, scoreLine } from "./rounds";
+import { buildRounds, isRoundInProgress, pickRound, scoreLine } from "./rounds";
 
 const bsaMatches = matchesResponseSchema.parse(bsaSeason).matches;
 const cliMatches = matchesResponseSchema.parse(cliSeason).matches;
@@ -95,5 +95,25 @@ describe("scoreLine", () => {
       away: null,
       penalties: null,
     });
+  });
+});
+describe("isRoundInProgress", () => {
+  const rounds = buildRounds(bsaMatches);
+
+  it("is true for a round with pending matches around now", () => {
+    const round = rounds[33];
+    expect(round && isRoundInProgress(round, now)).toBe(true);
+  });
+
+  it("is false for a finished round", () => {
+    const round = rounds[0];
+    expect(round && isRoundInProgress(round, now)).toBe(false);
+  });
+
+  it("is false for a round that is still far away", () => {
+    const round = rounds[37];
+    expect(
+      round && isRoundInProgress(round, new Date("2026-01-01T12:00:00Z")),
+    ).toBe(false);
   });
 });

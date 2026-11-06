@@ -78,6 +78,10 @@ export function StandingsTable({
               : null;
             const zoneBreak =
               previous !== undefined && previousZone?.label !== zone?.label;
+            const next = rows[index + 1];
+            const breakAfter =
+              next !== undefined &&
+              getZone(config, next.position)?.label !== zone?.label;
             const teamName = row.team.shortName ?? row.team.name;
             return (
               <Fragment key={row.team.id}>
@@ -90,7 +94,7 @@ export function StandingsTable({
                 ) : null}
                 <tr
                   data-zone={zone?.tone}
-                  className="border-border border-b last:border-b-0"
+                  className={`border-border last:border-b-0 ${breakAfter ? "" : "border-b"}`}
                 >
                   <td className={`${stickyCell} left-0 w-12 py-2.5 pl-4`}>
                     <span className="flex items-center gap-2.5">

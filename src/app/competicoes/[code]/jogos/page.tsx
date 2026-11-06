@@ -10,7 +10,7 @@ import { isCompetitionCode } from "@/lib/competitions";
 import { getMatches } from "@/lib/football-api/competitions";
 import { handleApiError } from "@/lib/football-api/handle-api-error";
 import type { Match } from "@/lib/football-api/types";
-import { buildRounds, pickRound } from "@/lib/stats/rounds";
+import { buildRounds, isRoundInProgress, pickRound } from "@/lib/stats/rounds";
 
 export const dynamic = "force-dynamic";
 
@@ -55,7 +55,9 @@ export default async function MatchesPage({ params, searchParams }: PageProps) {
             code={code}
             rounds={rounds}
             current={current}
-            isLive={current.key === live?.key}
+            isLive={
+              current.key === live?.key && isRoundInProgress(current, now)
+            }
           />
           <MatchesByDay matches={current.matches} now={now} />
         </>

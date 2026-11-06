@@ -12,7 +12,7 @@ describe("Crest", () => {
       />,
     );
     expect(
-      screen.getByRole("img", { name: "Escudo do Flamengo" }),
+      screen.getByRole("img", { name: "Escudo: Flamengo" }),
     ).toBeInTheDocument();
   });
 
@@ -29,7 +29,7 @@ describe("Crest", () => {
         size={24}
       />,
     );
-    fireEvent.error(screen.getByRole("img", { name: "Escudo do Santos" }));
+    fireEvent.error(screen.getByRole("img", { name: "Escudo: Santos" }));
     expect(screen.getByText("SAN")).toBeInTheDocument();
   });
 });

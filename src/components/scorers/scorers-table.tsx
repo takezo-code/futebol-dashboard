@@ -53,7 +53,7 @@ export function ScorersTable({ scorers }: { scorers: Scorer[] }) {
           </tr>
         </thead>
         <tbody>
-          {scorers.map((scorer, index) => {
+          {scorers.map((scorer) => {
             const teamName = scorer.team.shortName ?? scorer.team.name;
             return (
               <tr
@@ -63,7 +63,8 @@ export function ScorersTable({ scorers }: { scorers: Scorer[] }) {
                 <td
                   className={`${stickyCell} font-display left-0 w-12 py-2.5 pl-4 text-base tabular-nums`}
                 >
-                  {index + 1}
+                  {scorers.findIndex((other) => other.goals === scorer.goals) +
+                    1}
                 </td>
                 <th
                   scope="row"

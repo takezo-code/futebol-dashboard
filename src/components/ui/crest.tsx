@@ -27,7 +27,7 @@ export function Crest({ src, name, size }: CrestProps) {
   return (
     <Image
       src={src}
-      alt={`Escudo do ${name}`}
+      alt={`Escudo: ${name}`}
       width={size}
       height={size}
       unoptimized

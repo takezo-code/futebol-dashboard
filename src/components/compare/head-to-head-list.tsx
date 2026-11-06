@@ -25,7 +25,9 @@ export function HeadToHeadList({ result, aName, bName }: HeadToHeadListProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="font-medium">{summary}</p>
+      {result.matches.some((match) => match.status === "FINISHED") ? (
+        <p className="font-medium">{summary}</p>
+      ) : null}
       <ul className="grid gap-3 md:grid-cols-2">
         {result.matches.map((match) => (
           <li key={match.id}>

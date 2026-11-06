@@ -16,7 +16,7 @@ import {
 } from "@/lib/football-api/competitions";
 import { handleApiError } from "@/lib/football-api/handle-api-error";
 import type { Match, Scorer, Standings } from "@/lib/football-api/types";
-import { buildRounds, pickRound } from "@/lib/stats/rounds";
+import { buildRounds, isRoundInProgress, pickRound } from "@/lib/stats/rounds";
 
 export const dynamic = "force-dynamic";
 
@@ -56,14 +56,21 @@ export default async function OverviewPage({ params }: PageProps) {
   const rows =
     standings.standings.find((table) => table.type === "TOTAL")?.table ?? [];
   const rounds = buildRounds(matches);
-  const live = pickRound(rounds, undefined, new Date());
+  const now = new Date();
+  const live = pickRound(rounds, undefined, now);
 
   return (
     <div className="flex flex-col gap-6">
       <CompetitionTabs code={code} active="overview" />
       <div className="grid gap-4 lg:grid-cols-[1.1fr_1fr]">
         <div className="flex flex-col gap-4">
-          {live ? <CurrentRoundCard code={code} round={live} isLive /> : null}
+          {live ? (
+            <CurrentRoundCard
+              code={code}
+              round={live}
+              isLive={isRoundInProgress(live, now)}
+            />
+          ) : null}
           <TopScorersCard code={code} scorers={scorers} />
         </div>
         {rows.length > 0 ? (

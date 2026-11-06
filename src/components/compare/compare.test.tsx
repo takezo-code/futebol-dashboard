@@ -113,6 +113,20 @@ describe("HeadToHeadList", () => {
     ).toBeInTheDocument();
   });
 
+  it("skips the summary when no meeting was played yet", () => {
+    const result = headToHead(matches, 1783, 1765);
+    const upcoming = result.matches.map((m) => ({ ...m, status: "TIMED" }));
+    render(
+      <HeadToHeadList
+        result={{ matches: upcoming, aWins: 0, draws: 0, bWins: 0 }}
+        aName="Flamengo"
+        bName="Fluminense"
+      />,
+    );
+    expect(screen.queryByText(/vitórias/)).toBeNull();
+    expect(screen.getAllByRole("article")).toHaveLength(2);
+  });
+
   it("explains when the teams never met", () => {
     render(
       <HeadToHeadList
