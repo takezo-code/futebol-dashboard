@@ -14,7 +14,7 @@ export const COMPETITION_CODES = [
 
 export type CompetitionCode = (typeof COMPETITION_CODES)[number];
 
-export type ZoneTone = "continental" | "secondary" | "relegation";
+export type ZoneTone = "continental" | "qualifier" | "secondary" | "relegation";
 
 export type Zone = {
   from: number;
@@ -60,7 +60,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
     format: "league",
     zones: [
       { from: 1, to: 4, label: "Libertadores", tone: "continental" },
-      { from: 5, to: 6, label: "Pré-Libertadores", tone: "continental" },
+      { from: 5, to: 6, label: "Pré-Libertadores", tone: "qualifier" },
       { from: 7, to: 12, label: "Sul-Americana", tone: "secondary" },
       { from: 17, to: 20, label: "Rebaixamento", tone: "relegation" },
     ],

@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { FavoriteButton } from "@/components/favorites/favorite-button";
 import { TeamLink } from "@/components/team/team-link";
 import { Crest } from "@/components/ui/crest";
@@ -69,76 +70,90 @@ export function StandingsTable({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => {
+          {rows.map((row, index) => {
             const zone = getZone(config, row.position);
+            const previous = rows[index - 1];
+            const previousZone = previous
+              ? getZone(config, previous.position)
+              : null;
+            const zoneBreak =
+              previous !== undefined && previousZone?.label !== zone?.label;
             const teamName = row.team.shortName ?? row.team.name;
             return (
-              <tr
-                key={row.team.id}
-                data-zone={zone?.tone}
-                className="border-border border-b last:border-b-0"
-              >
-                <td className={`${stickyCell} left-0 w-12 py-2.5 pl-4`}>
-                  <span className="flex items-center gap-2.5">
-                    <span
-                      aria-hidden="true"
-                      className={`h-5 w-1 ${zone ? ZONE_BAR_CLASS[zone.tone] : "bg-transparent"}`}
-                    />
-                    <span className="font-display text-base tabular-nums">
-                      {row.position}
-                    </span>
-                    {zone ? (
-                      <span className="sr-only">{zone.label}</span>
-                    ) : null}
-                  </span>
-                </td>
-                <th
-                  scope="row"
-                  className={`${stickyCell} left-12 py-2.5 pr-3 text-left font-medium`}
+              <Fragment key={row.team.id}>
+                {zoneBreak ? (
+                  <tr aria-hidden="true" data-zone-break="">
+                    <td colSpan={11} className="p-0">
+                      <div className="border-muted/50 border-t border-dashed" />
+                    </td>
+                  </tr>
+                ) : null}
+                <tr
+                  data-zone={zone?.tone}
+                  className="border-border border-b last:border-b-0"
                 >
-                  <span className="flex items-center gap-2">
-                    <FavoriteButton
-                      size="sm"
-                      team={{
-                        id: row.team.id,
-                        name: teamName,
-                        crest: row.team.crest,
-                      }}
-                    />
-                    <Crest src={row.team.crest} name={teamName} size={20} />
-                    <TeamLink id={row.team.id} className="whitespace-nowrap">
-                      {teamName}
-                    </TeamLink>
-                  </span>
-                </th>
-                {[
-                  row.playedGames,
-                  row.won,
-                  row.draw,
-                  row.lost,
-                  row.goalsFor,
-                  row.goalsAgainst,
-                ].map((value, index) => (
-                  <td
-                    key={index}
-                    className="font-display px-2 text-right text-base tabular-nums"
-                  >
-                    {value}
+                  <td className={`${stickyCell} left-0 w-12 py-2.5 pl-4`}>
+                    <span className="flex items-center gap-2.5">
+                      <span
+                        aria-hidden="true"
+                        className={`h-5 w-1 ${zone ? ZONE_BAR_CLASS[zone.tone] : "bg-transparent"}`}
+                      />
+                      <span className="font-display text-base tabular-nums">
+                        {row.position}
+                      </span>
+                      {zone ? (
+                        <span className="sr-only">{zone.label}</span>
+                      ) : null}
+                    </span>
                   </td>
-                ))}
-                <td className="font-display px-2 text-right text-base tabular-nums">
-                  {formatGoalDifference(row.goalDifference)}
-                </td>
-                <td className="font-display px-2 text-right text-lg font-bold tabular-nums">
-                  {row.points}
-                </td>
-                <td className="px-4">
-                  <FormDots
-                    entries={formByTeam.get(row.team.id) ?? []}
-                    teamId={row.team.id}
-                  />
-                </td>
-              </tr>
+                  <th
+                    scope="row"
+                    className={`${stickyCell} left-12 py-2.5 pr-3 text-left font-medium`}
+                  >
+                    <span className="flex items-center gap-2">
+                      <FavoriteButton
+                        size="sm"
+                        team={{
+                          id: row.team.id,
+                          name: teamName,
+                          crest: row.team.crest,
+                        }}
+                      />
+                      <Crest src={row.team.crest} name={teamName} size={20} />
+                      <TeamLink id={row.team.id} className="whitespace-nowrap">
+                        {teamName}
+                      </TeamLink>
+                    </span>
+                  </th>
+                  {[
+                    row.playedGames,
+                    row.won,
+                    row.draw,
+                    row.lost,
+                    row.goalsFor,
+                    row.goalsAgainst,
+                  ].map((value, index) => (
+                    <td
+                      key={index}
+                      className="font-display px-2 text-right text-base tabular-nums"
+                    >
+                      {value}
+                    </td>
+                  ))}
+                  <td className="font-display px-2 text-right text-base tabular-nums">
+                    {formatGoalDifference(row.goalDifference)}
+                  </td>
+                  <td className="font-display px-2 text-right text-lg font-bold tabular-nums">
+                    {row.points}
+                  </td>
+                  <td className="px-4">
+                    <FormDots
+                      entries={formByTeam.get(row.team.id) ?? []}
+                      teamId={row.team.id}
+                    />
+                  </td>
+                </tr>
+              </Fragment>
             );
           })}
         </tbody>

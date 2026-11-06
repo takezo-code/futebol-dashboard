@@ -43,6 +43,8 @@ describe("StandingsTable", () => {
       within(bodyRows[17] as HTMLElement).getByText("Rebaixamento"),
     ).toHaveClass("sr-only");
     expect(bodyRows[13]).not.toHaveAttribute("data-zone");
+    expect(document.querySelectorAll("[data-zone-break]")).toHaveLength(4);
+    expect(bodyRows[4]).toHaveAttribute("data-zone", "qualifier");
   });
 });
 

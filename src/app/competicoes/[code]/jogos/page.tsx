@@ -4,8 +4,9 @@ import {
   CompetitionTabs,
   competitionMetadata,
 } from "@/components/competition/competition-tabs";
-import { MatchCard } from "@/components/matches/match-card";
+
 import { MatchdayNav } from "@/components/matches/matchday-nav";
+import { MatchesByDay } from "@/components/overview/matches-by-day";
 import { isCompetitionCode } from "@/lib/competitions";
 import { getMatches } from "@/lib/football-api/competitions";
 import { handleApiError } from "@/lib/football-api/handle-api-error";
@@ -57,13 +58,7 @@ export default async function MatchesPage({ params, searchParams }: PageProps) {
             current={current}
             isLive={current.key === live?.key}
           />
-          <ul className="grid gap-3 md:grid-cols-2">
-            {current.matches.map((match) => (
-              <li key={match.id}>
-                <MatchCard match={match} />
-              </li>
-            ))}
-          </ul>
+          <MatchesByDay matches={current.matches} now={now} />
         </>
       ) : (
         <p className="text-muted">Ainda não há jogos nesta temporada.</p>

@@ -15,7 +15,8 @@
   --draw: #5f6b73;
   --loss: #c2372e;
   --zone-continental: #2b62b3;
-  --zone-secondary: #8c6d1f;
+  --zone-qualifier: #1e9b8f;
+  --zone-secondary: #b07a12;
   --zone-relegation: #c2372e;
   --pitch: #1e6b45;
   --pitch-stripe: #23794f;
@@ -36,9 +37,10 @@
   --win: #3fae6a;
   --draw: #8a969d;
   --loss: #e5564b;
-  --zone-continental: #4a86d9;
-  --zone-secondary: #c9a54a;
-  --zone-relegation: #e5564b;
+  --zone-continental: #4f86db;
+  --zone-qualifier: #2fa390;
+  --zone-secondary: #b5892a;
+  --zone-relegation: #e25e7c;
   --pitch: #17543a;
   --pitch-stripe: #1b6043;
   --chart-1: #2e9a58;
@@ -59,6 +61,7 @@
   --color-draw: var(--draw);
   --color-loss: var(--loss);
   --color-zone-continental: var(--zone-continental);
+  --color-zone-qualifier: var(--zone-qualifier);
   --color-zone-secondary: var(--zone-secondary);
   --color-zone-relegation: var(--zone-relegation);
   --color-pitch: var(--pitch);
