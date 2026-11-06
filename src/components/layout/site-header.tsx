@@ -13,6 +13,12 @@ export function SiteHeader() {
           Futebol Dashboard
         </Link>
         <nav aria-label="Principal" className="flex items-center gap-1">
+          <Link
+            href="/meus-times"
+            className="hover:bg-surface focus-visible:outline-brand rounded-md px-3 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            Meus times
+          </Link>
           <LeagueMenu />
           <ThemeToggle />
         </nav>
