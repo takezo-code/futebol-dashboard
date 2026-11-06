@@ -1,3 +1,4 @@
+import { FavoriteButton } from "@/components/favorites/favorite-button";
 import { Crest } from "@/components/ui/crest";
 import type { Team } from "@/lib/football-api/types";
 import { translateClubColors } from "@/lib/format";
@@ -32,9 +33,18 @@ export function TeamHeader({ team }: { team: Team }) {
       </span>
       <div className="flex flex-col gap-3">
         <div>
-          <h1 className="font-display text-4xl leading-tight font-bold">
-            {team.name}
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="font-display text-4xl leading-tight font-bold">
+              {team.name}
+            </h1>
+            <FavoriteButton
+              team={{
+                id: team.id,
+                name: team.shortName ?? team.name,
+                crest: team.crest,
+              }}
+            />
+          </div>
           <p className="text-muted text-sm">{team.area.name}</p>
         </div>
         <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-sm sm:grid-cols-2">

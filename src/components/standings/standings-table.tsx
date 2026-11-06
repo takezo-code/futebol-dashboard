@@ -1,3 +1,4 @@
+import { FavoriteButton } from "@/components/favorites/favorite-button";
 import { TeamLink } from "@/components/team/team-link";
 import { Crest } from "@/components/ui/crest";
 import { getZone, type CompetitionConfig } from "@/lib/competitions";
@@ -96,6 +97,14 @@ export function StandingsTable({
                   className={`${stickyCell} left-12 py-2.5 pr-3 text-left font-medium`}
                 >
                   <span className="flex items-center gap-2">
+                    <FavoriteButton
+                      size="sm"
+                      team={{
+                        id: row.team.id,
+                        name: teamName,
+                        crest: row.team.crest,
+                      }}
+                    />
                     <Crest src={row.team.crest} name={teamName} size={20} />
                     <TeamLink id={row.team.id} className="whitespace-nowrap">
                       {teamName}
