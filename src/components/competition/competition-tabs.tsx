@@ -62,7 +62,7 @@ type CompetitionTabsProps = {
 export function CompetitionTabs({ code, active }: CompetitionTabsProps) {
   return (
     <nav aria-label="Seções da competição" className="border-border border-b">
-      <ul className="-mb-px flex gap-1 overflow-x-auto">
+      <ul className="-mb-px flex [scrollbar-width:none] gap-1 overflow-x-auto">
         {TABS.map((tab) => {
           const isActive = tab.id === active;
           return (
