@@ -95,6 +95,17 @@ describe("TeamMatches", () => {
     expect(within(recent).getAllByRole("article")).toHaveLength(5);
   });
 
+  it("keeps live matches in the upcoming section", () => {
+    const base = matches.find((m) => m.status === "TIMED");
+    if (!base) {
+      throw new Error("fixture without timed match");
+    }
+    render(<TeamMatches matches={[{ ...base, status: "IN_PLAY" }]} />);
+    const upcoming = screen.getByRole("region", { name: "Próximos jogos" });
+    expect(within(upcoming).getAllByRole("article")).toHaveLength(1);
+    expect(within(upcoming).getByText("Em andamento")).toBeInTheDocument();
+  });
+
   it("explains empty sections", () => {
     render(<TeamMatches matches={[]} />);
     expect(screen.getByText("Nenhum jogo agendado.")).toBeInTheDocument();

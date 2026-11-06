@@ -1,7 +1,7 @@
 import { MatchCard } from "@/components/matches/match-card";
 import type { Match } from "@/lib/football-api/types";
 
-const UPCOMING = new Set(["SCHEDULED", "TIMED"]);
+const UPCOMING = new Set(["IN_PLAY", "PAUSED", "SCHEDULED", "TIMED"]);
 const LIMIT = 5;
 
 function Section({
