@@ -35,6 +35,12 @@ describe("competitions", () => {
     expect(getZone(COMPETITIONS.BSA, 14)).toBeNull();
   });
 
+  it("names countries in portuguese", () => {
+    expect(COMPETITIONS.BSA.country).toBe("Brasil");
+    expect(COMPETITIONS.CLI.country).toBe("América do Sul");
+    expect(COMPETITIONS.DED.country).toBe("Países Baixos");
+  });
+
   it("marks cups with the cup format", () => {
     expect(COMPETITIONS.CL.format).toBe("cup");
     expect(COMPETITIONS.CLI.format).toBe("cup");

@@ -26,6 +26,7 @@ export type Zone = {
 export type CompetitionConfig = {
   code: CompetitionCode;
   name: string;
+  country: string;
   format: "league" | "cup";
   zones: Zone[];
 };
@@ -53,6 +54,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
   BSA: {
     code: "BSA",
     name: "Brasileirão Série A",
+    country: "Brasil",
     format: "league",
     zones: [
       { from: 1, to: 4, label: "Libertadores", tone: "continental" },
@@ -64,6 +66,7 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
   CLI: {
     code: "CLI",
     name: "Copa Libertadores",
+    country: "América do Sul",
     format: "cup",
     zones: [
       { from: 1, to: 2, label: "Oitavas de final", tone: "continental" },
@@ -73,36 +76,42 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
   PL: {
     code: "PL",
     name: "Premier League",
+    country: "Inglaterra",
     format: "league",
     zones: topFourLeague(18, 20),
   },
   PD: {
     code: "PD",
     name: "La Liga",
+    country: "Espanha",
     format: "league",
     zones: topFourLeague(18, 20),
   },
   SA: {
     code: "SA",
     name: "Serie A",
+    country: "Itália",
     format: "league",
     zones: topFourLeague(18, 20),
   },
   BL1: {
     code: "BL1",
     name: "Bundesliga",
+    country: "Alemanha",
     format: "league",
     zones: topFourLeague(17, 18),
   },
   FL1: {
     code: "FL1",
     name: "Ligue 1",
+    country: "França",
     format: "league",
     zones: topThreeLeague,
   },
   CL: {
     code: "CL",
     name: "Champions League",
+    country: "Europa",
     format: "cup",
     zones: [
       { from: 1, to: 8, label: "Oitavas de final", tone: "continental" },
@@ -112,18 +121,21 @@ export const COMPETITIONS: Record<CompetitionCode, CompetitionConfig> = {
   DED: {
     code: "DED",
     name: "Eredivisie",
+    country: "Países Baixos",
     format: "league",
     zones: topThreeLeague,
   },
   PPL: {
     code: "PPL",
     name: "Primeira Liga",
+    country: "Portugal",
     format: "league",
     zones: topThreeLeague,
   },
   ELC: {
     code: "ELC",
     name: "Championship",
+    country: "Inglaterra",
     format: "league",
     zones: [
       { from: 1, to: 2, label: "Acesso", tone: "continental" },
