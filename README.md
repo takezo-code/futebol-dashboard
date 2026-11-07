@@ -9,7 +9,7 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
-![Testes](https://img.shields.io/badge/testes-215_passando-2ea44f?logo=vitest&logoColor=white)
+![Testes](https://img.shields.io/badge/testes-223_passando-2ea44f?logo=vitest&logoColor=white)
 ![Vercel](https://img.shields.io/badge/deploy-Vercel-000000?logo=vercel&logoColor=white)
 
 ### [🔗 Acessar o site: painel-da-bola.vercel.app](https://painel-da-bola.vercel.app/)
@@ -32,7 +32,6 @@
 - [Qualidade e desempenho](#-qualidade-e-desempenho)
 - [Estrutura de pastas](#-estrutura-de-pastas)
 - [Como rodar localmente](#-como-rodar-localmente)
-- [Próximos passos](#-próximos-passos)
 - [Autor](#-autor)
 
 ---
@@ -231,7 +230,7 @@ Os testes conferem esses cálculos contra a tabela oficial que a própria API de
 
 ### Testes e CI
 
-- **215 testes** em 43 arquivos, cobrindo cálculos, formatação, componentes, favoritos e a rota interna.
+- **223 testes** em 45 arquivos, cobrindo cálculos, formatação, componentes, favoritos e a rota interna.
 - Os testes **nunca chamam a API real**: usam só as respostas salvas em `__fixtures__`.
 - A cada push, o GitHub Actions roda `lint`, `typecheck`, `test` e `build`, sem precisar de token.
 
@@ -320,14 +319,6 @@ Depois, acesse [http://localhost:3000](http://localhost:3000).
 | `pnpm typecheck` | Verifica os tipos com TypeScript                                        |
 | `pnpm format`    | Formata o código com Prettier                                           |
 | `pnpm fixtures`  | Atualiza as respostas reais da API usadas nos testes (precisa do token) |
-
----
-
-## 🔭 Próximos passos
-
-- [ ] Login e favoritos salvos em banco de dados.
-- [ ] Backend separado em NestJS.
-- [ ] Placar ao vivo e notificações (exige um plano pago da API).
 
 ---
 
